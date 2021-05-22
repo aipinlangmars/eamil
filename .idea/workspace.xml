@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="162a3674-b9cf-4eb2-ae49-7d7591d159b7" name="Default Changelist" comment="version1">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/eamil_war.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/eamil_war_exploded.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_virtuald_curvesapi_1_04.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_javax_mail_1_5_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_activation_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_el_el_api_2_1_2_b05.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_mail_javax_mail_api_1_5_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jsp_jsp_api_2_1_3_b06.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_5_1_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_collections4_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_poi_poi_ooxml_schemas_3_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_xmlbeans_xmlbeans_2_6_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_javax_servlet_3_0_b70.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_4_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eamil.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/Demo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/Demo2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/MyException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/PoiDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/CityDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/CityDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/CustomerDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/CustomerDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/DistributorNameDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/DistributorNameDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1025.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1025.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1027.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1027.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1028.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1028.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/EmailDao1039.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/PrivateCityDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/PrivateCityDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/PrivateDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/PrivateDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/RemarkDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/RemarkDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/TelephoneHeadDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/TelephoneHeadDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/dao/UserDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Carrier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Data1025.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Data1027.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Data1028.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Data1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/DataPrediction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/DistributorName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/P.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/ParentData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/PrivateCity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/PrivateCus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/Remark.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/RemarkPl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/TelephoneHead.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/domain/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/EmailService1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/PredictionDataService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/impl/EmailServiceImpl1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/impl/PredictionDataImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/DataExu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/DataParent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/Fomat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/MD5Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/MessageEncoding.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/MySqlSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/POI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/POP3Demo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/POP3ReceiveMailTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/PrintJson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/ServiceFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/SqlSessionUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/TransactionInvocationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetData1025.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetData1027.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetData1028.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetData1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetDataCity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/GetDataCus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/utils/getdata/Parent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/vo/DataVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/vo/POIVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/vo/ReadVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/vo/ResultVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/controller/Email1039.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/filter/EncodingFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/filter/LoginFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/mars/wang/web/listener/SysInitListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mysqlJdbc.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/image/IMG_7114.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/image/home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/image/user-thumbnail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/bootstrap_3.3.0/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/jquery-1.11.1-min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/1_close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/1_open.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/diy/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/line_conn.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/loading.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/zTreeStandard.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/img/zTreeStandard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/jquery/zTree_v3-master/js/jquery.ztree.all.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dept/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/type/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/type/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/type/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/value/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/value/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/dictionary/value/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/qx/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/qx/user/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/settings/qx/user/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/activity/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/activity/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/chart/activity/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/chart/clue/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/chart/customerAndContacts/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/chart/transaction/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/clue/convert.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/clue/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/clue/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/contacts/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/contacts/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/customer/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/customer/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/index.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/main/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/transaction/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/transaction/edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/transaction/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/transaction/save.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/visit/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/visit/editTask.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/visit/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/workbench/visit/saveTask.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/Demo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/Demo2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/MyException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/PoiDemo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/CityDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/CityDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/CustomerDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/CustomerDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/DistributorNameDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/DistributorNameDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1025.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1025.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1027.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1027.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1028.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1028.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/EmailDao1039.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/PrivateCityDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/PrivateCityDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/PrivateDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/PrivateDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/RemarkDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/RemarkDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/TelephoneHeadDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/TelephoneHeadDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/UserDao.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/dao/UserDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Carrier.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/City.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Customer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Data1025.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Data1027.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Data1028.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Data1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/DataPrediction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/DistributorName.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/P.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/ParentData.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/PrivateCity.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/PrivateCus.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/Remark.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/RemarkPl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/TelephoneHead.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/domain/User.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/EmailService1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/PredictionDataService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/UserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/impl/EmailServiceImpl1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/impl/PredictionDataImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/DataExu.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/DataParent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/Fomat.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/MD5Util.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/MessageEncoding.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/MySqlSession.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/POI$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/POI.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/POP3Demo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/POP3ReceiveMailTest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/PrintJson.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/ServiceFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/SqlSessionUtil.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/TransactionInvocationHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/getdata/GetData1025.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/getdata/GetData1027.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/getdata/GetData1028.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/getdata/GetData1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/utils/getdata/Parent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/vo/DataVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/vo/POIVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/vo/ReadVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/vo/ResultVo.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/web/Test.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/web/controller/Email1039.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/web/controller/LoginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/web/filter/EncodingFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/mars/wang/web/filter/LoginFilter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mybatis-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/mysqlJdbc.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\powernode\eamil\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1sdssBJbnQBMdRCh2VpAsBJoh7i" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\powernode\eamil\src\main\java\com\mars\wang\dao" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.EmailServiceImpl1039">
+    <configuration name="DataExu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mars.wang.utils.DataExu" />
+      <module name="eamil" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mars.wang.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailServiceImpl1039" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mars.wang.service.impl.EmailServiceImpl1039" />
+      <module name="eamil" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mars.wang.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="POI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mars.wang.utils.POI" />
+      <module name="eamil" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mars.wang.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="POP3ReceiveMailTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mars.wang.utils.POP3ReceiveMailTest" />
+      <module name="eamil" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mars.wang.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PredictionDataImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.mars.wang.service.impl.PredictionDataImpl" />
+      <module name="eamil" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.mars.wang.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.EmailServiceImpl1039" />
+        <item itemvalue="Application.POI" />
+        <item itemvalue="Application.DataExu" />
+        <item itemvalue="Application.PredictionDataImpl" />
+        <item itemvalue="Application.POP3ReceiveMailTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="162a3674-b9cf-4eb2-ae49-7d7591d159b7" name="Default Changelist" comment="" />
+      <created>1621214005779</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621214005779</updated>
+      <workItem from="1621214110037" duration="9551000" />
+      <workItem from="1621228277877" duration="16289000" />
+      <workItem from="1621251846959" duration="5216000" />
+      <workItem from="1621300354799" duration="28323000" />
+      <workItem from="1621402949152" duration="10372000" />
+      <workItem from="1621416190852" duration="1425000" />
+      <workItem from="1621473518370" duration="23218000" />
+      <workItem from="1621561677733" duration="16448000" />
+      <workItem from="1621605404605" duration="17764000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="version1" />
+    <option name="LAST_COMMIT_MESSAGE" value="version1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1621404073023">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="254" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.860@0.0.1600.860" timestamp="1621404073023" />
+    <state x="545" y="156" key="#com.intellij.ide.util.MemberChooser" timestamp="1621566846172">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="545" y="156" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1621566846172" />
+    <state x="594" y="320" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1621404879649">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="594" y="320" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1600.860@0.0.1600.860" timestamp="1621404879649" />
+    <state x="577" y="341" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1621346652042">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="577" y="341" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1600.860@0.0.1600.860" timestamp="1621346652042" />
+    <state x="355" y="48" key="CommitChangelistDialog2" timestamp="1621672328882">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="355" y="48" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1621672328882" />
+    <state x="359" y="185" key="FileChooserDialogImpl" timestamp="1621657541199">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="359" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1621657541199" />
+    <state width="1540" height="186" key="GridCell.Tab.0.bottom" timestamp="1621583533924">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1540" height="186" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1621583533924" />
+    <state width="1540" height="186" key="GridCell.Tab.0.center" timestamp="1621583533924">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1540" height="186" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1621583533924" />
+    <state width="1540" height="186" key="GridCell.Tab.0.left" timestamp="1621583533924">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1540" height="186" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1621583533924" />
+    <state width="1540" height="186" key="GridCell.Tab.0.right" timestamp="1621583533924">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1540" height="186" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1621583533924" />
+    <state width="1473" height="258" key="GridCell.Tab.1.bottom" timestamp="1621415182917">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1473" height="258" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1621415182917" />
+    <state width="1473" height="258" key="GridCell.Tab.1.center" timestamp="1621415182917">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1473" height="258" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1621415182917" />
+    <state width="1473" height="258" key="GridCell.Tab.1.left" timestamp="1621415182917">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1473" height="258" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1621415182917" />
+    <state width="1473" height="258" key="GridCell.Tab.1.right" timestamp="1621415182917">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1473" height="258" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1621415182917" />
+    <state x="80" y="72" key="SettingsEditor" timestamp="1621655698351">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="80" y="72" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1621655698351" />
+    <state x="479" y="243" key="com.intellij.ide.util.TipDialog" timestamp="1621605452856">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="479" y="243" key="com.intellij.ide.util.TipDialog/0.0.1600.860@0.0.1600.860" timestamp="1621605452856" />
+    <state x="406" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1621319278569">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="406" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1621319278569" />
+  </component>
+</project>

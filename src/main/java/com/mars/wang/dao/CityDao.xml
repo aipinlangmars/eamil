@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.CityDao">
+    <insert id="insertCity" parameterType="java.util.List">
+        INSERT INTO  tb_city
+        (
+        city,
+        province,
+        leadTime,
+        airTime,
+        carrier,
+        airCarrier
+
+        )VALUES
+        <foreach collection="list" index="index" item="city" separator=","  >
+            (
+            #{city.city},
+            #{city.province},
+            #{city.leadTime},
+            #{city.airTime},
+            #{city.carrier},
+            #{city.airCarrier}
+            )
+        </foreach>
+    </insert>
+
+    <select id="getAriLead" parameterType="String" resultType="String">
+
+
+       select airTime from tb_city where city=#{value}
+
+
+   </select>
+    <!--陆运时效-->
+    <select id="getNormalLead" parameterType="String" resultType="String">
+
+
+       select leadTime from tb_city where city=#{value}
+
+
+   </select>
+
+    <select id="searchByCity" parameterType="String" resultType="com.mars.wang.domain.City">
+
+
+       select * from tb_city where city=#{value}
+
+
+   </select>
+
+    <select id="getNormalCarrier" parameterType="String" resultType="String">
+
+        select carrier from tb_city where city = #{value}
+
+    </select>
+    <select id="getAirCarrier" parameterType="String" resultType="String">
+
+        select airCarrier from tb_city where city = #{value}
+
+    </select>
+
+
+
+</mapper>

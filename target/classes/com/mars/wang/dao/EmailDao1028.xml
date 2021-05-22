@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.EmailDao1028">
+    <insert id="insert1028" parameterType="java.util.List">
+        INSERT INTO  data1028
+        (
+        infoDate,
+        bu,
+        loadkey,
+         hub,
+        consigneekey,
+        c_city,
+        customerName,
+        c_address3,
+        c_address2,
+        unit,
+        ctns,
+        carrier,
+        orderCoder,
+        shipDate,
+        ataDate,
+        remar,
+        requestDate
+        )VALUES
+        <foreach collection="list" index="index" item="data1028" separator=","  >
+            (
+            #{data1028.infoDate},
+            #{data1028.bu},
+            #{data1028.loadkey},
+            #{data1028.hub},
+            #{data1028.consigneekey},
+            #{data1028.c_city},
+            #{data1028.customerName},
+            #{data1028.c_address3},
+            #{data1028.c_address2},
+            #{data1028.unit},
+            #{data1028.ctns},
+            #{data1028.carrier},
+            #{data1028.orderCoder},
+            #{data1028.shipDate},
+            #{data1028.ataDate},
+            #{data1028.remar},
+            #{data1028.requestDate}
+            )
+        </foreach>
+    </insert>
+    <update id="update1028"  parameterType="com.mars.wang.domain.Data1028">
+            update data1028 SET
+            infoDate = #{infoDate},
+            bu = #{bu},
+            loadkey = #{loadkey},
+            hub = #{hub},
+            consigneekey = #{consigneekey},
+            c_city = #{c_city},
+            customerName = #{customerName},
+            c_address3 = #{c_address3},
+            c_address2 = #{c_address2},
+            unit = #{unit},
+            ctns = #{ctns},
+            carrier = #{carrier},
+            orderCoder = #{orderCoder},
+            shipDate = #{shipDate},
+            ataDate = #{ataDate},
+            remar = #{remar},
+            requestDate = #{requestDate}
+
+            where loadkey = #{loadkey}
+
+    </update>
+
+    <select id="select" resultType="int">
+        select count(*) from data1039
+    </select>
+
+    <select id="getList1028" parameterType="String" resultType="com.mars.wang.domain.Data1028">
+
+        select * from data1028 where shipDate = #{value}
+
+    </select>
+</mapper>

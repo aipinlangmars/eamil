@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.EmailDao1039">
+    <insert id="insert1039" parameterType="java.util.List">
+        INSERT INTO  data1039
+        (
+        trailerNumber ,
+        trailerType,
+        carrierCode,
+        packlist,
+        province,
+        city,
+        wMSShipDate,
+        shipTo,
+        crdDate,
+        stName,
+        shipToPhoneNbr,
+        address1,
+        divs,
+        volume,
+        cTns,
+        unit
+        )VALUES
+        <foreach collection="list" index="index" item="data1039" separator=","  >
+            (
+            #{data1039.trailerNumber},
+            #{data1039.trailerType},
+            #{data1039.carrierCode},
+            #{data1039.packlist},
+            #{data1039.province},
+            #{data1039.city},
+            #{data1039.wMSShipDate},
+            #{data1039.shipTo},
+            #{data1039.crdDate},
+            #{data1039.stName},
+            #{data1039.shipToPhoneNbr},
+            #{data1039.address1},
+            #{data1039.divs},
+            #{data1039.volume},
+            #{data1039.cTns},
+            #{data1039.unit}
+            )
+        </foreach>
+    </insert>
+    <update id="update1039"  parameterType="com.mars.wang.domain.Data1039">
+            update data1039 SET
+            trailerNumber = #{trailerNumber},
+            trailerType = #{trailerType},
+            carrierCode = #{carrierCode},
+            province = #{province},
+            city = #{city},
+            wMSShipDate = #{wMSShipDate},
+            shipTo = #{shipTo},
+            crdDate = #{crdDate},
+            stName = #{stName},
+            shipToPhoneNbr = #{shipToPhoneNbr},
+            address1 = #{address1},
+            divs = #{divs},
+            volume = #{volume},
+            cTns = #{cTns},
+            unit = #{unit}
+
+            where packlist = #{packlist}
+
+    </update>
+
+    <select id="select" resultType="int">
+        select count(*) from data1039
+    </select>
+
+    <select id="getList1039" parameterType="String" resultType="com.mars.wang.domain.Data1039">
+
+        select * from data1039 where wMSShipDate = #{value}
+
+    </select>
+</mapper>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.EmailDao1027">
+    <insert id="insert1027" parameterType="java.util.List">
+        INSERT INTO  data1027
+        (
+        ordersrtewavedate,
+        ordersrtewavenbr,
+        waveparmdesc,
+        shipwavenbr,
+        shipwavedesc,
+        fulfillmentstatusdesc,
+        divdesc,
+        distriborderid,
+        shipmentnbr,
+        appointmentnbr,
+        requesteddttm,
+        asgndcarriercd,
+        assignedshipvia,
+        tpcompanynm,
+        carrhubcd,
+        ordersorderdt,
+        shipmentdlvryenddttm,
+        pickupstartdttm,
+        pickupenddttm,
+        totallpns,
+        totalunits,
+        psstflag,
+        shiptocustnbr,
+        phonenumber,
+        destfacilitynm,
+        destaddr1,
+        destaddr2,
+        destaddr3,
+        destcity,
+        destctrycd,
+        destpostalcd,
+        deststateprov
+        )VALUES
+        <foreach collection="list" index="index" item="data1027" separator=","  >
+            (
+            #{data1027.ordersrtewavedate},
+            #{data1027.ordersrtewavenbr},
+            #{data1027.waveparmdesc},
+            #{data1027.shipwavenbr},
+            #{data1027.shipwavedesc},
+            #{data1027.fulfillmentstatusdesc},
+            #{data1027.divdesc},
+            #{data1027.distriborderid},
+            #{data1027.shipmentnbr},
+            #{data1027.appointmentnbr},
+            #{data1027.requesteddttm},
+            #{data1027.asgndcarriercd},
+            #{data1027.assignedshipvia},
+            #{data1027.tpcompanynm},
+            #{data1027.carrhubcd},
+            #{data1027.ordersorderdt},
+            #{data1027.shipmentdlvryenddttm},
+            #{data1027.pickupstartdttm},
+            #{data1027.pickupenddttm},
+            #{data1027.totallpns},
+            #{data1027.totalunits},
+            #{data1027.psstflag},
+            #{data1027.shiptocustnbr},
+            #{data1027.phonenumber},
+            #{data1027.destfacilitynm},
+            #{data1027.destaddr1},
+            #{data1027.destaddr2},
+            #{data1027.destaddr3},
+            #{data1027.destcity},
+            #{data1027.destctrycd},
+            #{data1027.destpostalcd},
+            #{data1027.deststateprov}
+            )
+        </foreach>
+    </insert>
+    <update id="update1027"  parameterType="com.mars.wang.domain.Data1027">
+            update data1027 SET
+            ordersrtewavedate = #{ordersrtewavedate},
+            ordersrtewavenbr = #{ordersrtewavenbr},
+            waveparmdesc = #{waveparmdesc},
+            shipwavenbr = #{shipwavenbr},
+            shipwavedesc = #{shipwavedesc},
+            fulfillmentstatusdesc = #{fulfillmentstatusdesc},
+            divdesc = #{divdesc},
+
+            shipmentnbr = #{shipmentnbr},
+            appointmentnbr = #{appointmentnbr},
+            requesteddttm = #{requesteddttm},
+            asgndcarriercd = #{asgndcarriercd},
+            assignedshipvia = #{assignedshipvia},
+            tpcompanynm = #{tpcompanynm},
+            carrhubcd = #{carrhubcd},
+            ordersorderdt = #{ordersorderdt},
+            shipmentdlvryenddttm = #{shipmentdlvryenddttm},
+            pickupstartdttm = #{pickupstartdttm},
+            pickupenddttm = #{pickupenddttm},
+            totallpns = #{totallpns},
+            totalunits = #{totalunits},
+            psstflag = #{psstflag},
+            shiptocustnbr = #{shiptocustnbr},
+            phonenumber = #{phonenumber},
+            destfacilitynm = #{destfacilitynm},
+            destaddr1 = #{destaddr1},
+            destaddr2 = #{destaddr2},
+            destaddr3 = #{destaddr3},
+            destcity = #{destcity},
+            destctrycd = #{destctrycd},
+            destpostalcd = #{destpostalcd},
+            deststateprov = #{deststateprov}
+
+            where distriborderid = #{distriborderid}
+    </update>
+    <select id="select" resultType="int">
+        select count(*) from data1039
+    </select>
+
+    <!--根据日期提取记录-->
+    <select id="getList1027" parameterType="String" resultType="com.mars.wang.domain.Data1027">
+
+        select * from data1027 where requesteddttm = #{value}
+
+    </select>
+</mapper>

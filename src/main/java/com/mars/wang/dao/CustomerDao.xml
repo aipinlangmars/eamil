@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.CustomerDao">
+    <insert id="insertCustomer" parameterType="java.util.List">
+        INSERT INTO  tb_cus
+        (
+        c_Code,
+        c_Name,
+        abbreviation,
+        address,
+        city,
+        province,
+        contact,
+        telephone,
+        phone
+
+        )VALUES
+        <foreach collection="list" index="index" item="customer" separator=","  >
+            (
+            #{customer.c_Code},
+            #{customer.c_Name},
+            #{customer.abbreviation},
+            #{customer.address},
+            #{customer.city},
+            #{customer.province},
+            #{customer.contact},
+            #{customer.telephone},
+            #{customer.phone}
+            )
+        </foreach>
+    </insert>
+
+
+    <select id="searchByCode" parameterType="String" resultType="com.mars.wang.domain.Customer">
+
+        select * from tb_cus where c_Code = #{value};
+
+    </select>
+
+
+
+
+
+</mapper>
