@@ -25,21 +25,66 @@ public class POI {
 
         //sendMessage();
 
-        Customer customer = new Customer();
+        Customer customer;
+        List<Object> list = new ArrayList();
+        for (int i = 0 ;i<10;i++){
+            customer = new Customer();
+            customer.setC_Code("000"+i);
+            list.add(customer);
 
-        String[] excelHeads = getExcelHeads(customer);
+        }
+        //List<List<String>> classMap = getClassMap(list, new Customer());
+        writeExcel("",list,new Customer());
+
+
+
+
+
+
+
+
+
+
+
+        /*String[] excelHeads = getExcelHeads(customer);
         for (int i = 0;i<excelHeads.length;i++){
 
             System.out.println(excelHeads[i]);
 
-        }
+        }*/
     }
-    public static Map<String,List<String>> getClassMap(List<Object> list){
+    public static List<List<String>> getClassMap(List<Object> list,Object object){
+        String[] excelHeads = getExcelHeads(object);
+        List<List<String>> listS= new ArrayList<>();
+
+
+            for(Object o:list){
+
+                List<String> value = getValue(o);
+
+                listS.add(value);
+
+
+            }
 
 
 
+        return listS;
+    }
+    public static List<String> getValue(Object object){
+        List<String> list = new ArrayList<>();
+        String[] split = object.toString().split("'");
+        for (int i = 0;i<split.length;i++){
+            //过滤其他值
+            if (split[i].indexOf("=")!=-1||split[i].indexOf("}")!=-1){
+                continue;
+            }
+            list.add(split[i]);
 
-        return null;
+        }
+
+        return list;
+
     }
     public static String[] getExcelHeads(Object object){
 
@@ -64,11 +109,11 @@ public class POI {
     }
 
 
-    public static String writeExcel(String filePath, List<Customer> list,Object target) throws IOException {
+    public static String writeExcel(String filePath, List<Object> list,Object target) throws IOException {
 
 
         //定义表头
-        String path = "D:\\powernode\\Excel\\bodyPart";
+        String path = "E:\\powernode\\Excel\\bodyPart";
 
         String[] title=getExcelHeads(target);
 
@@ -85,24 +130,27 @@ public class POI {
             cell.setCellValue(title[i]);
         }
 //写入数据
-        for (int i=1;i<=list.size();i++){
-            Customer customer = list.get(i - 1);
-            XSSFRow nrow=sheet.createRow(i);
-            /*XSSFCell ncell=nrow.createCell(0);
-            ncell.setCellValue(customer.getC_Code());
-            ncell=nrow.createCell(1);
-            ncell.setCellValue(customer.getCity());
-            ncell=nrow.createCell(2);
-            ncell.setCellValue(customer.getAddress());*/
+        List<List<String>> classMap = getClassMap(list, new Customer());
+        for (int rows=1;rows<=classMap.size();rows++){
 
-
+            XSSFRow row1 = sheet.createRow(rows);
+            List<String> list1 = classMap.get(rows - 1);
+            for (int col = 0;col<list1.size();col++){
+                row1.createCell(col).setCellValue(list1.get(col));
+            }
 
         }
         UUID uuid = UUID.randomUUID();
+        if (!new File(path).exists()){
+            new File(path).mkdirs();
+        }
         String fileName = "\\"+ uuid.toString().replace("-", "")+".xlsx";
 
 //创建excel文件
+
         File file=new File(path+fileName);
+
+
         FileOutputStream stream;
         try {
             file.createNewFile();
