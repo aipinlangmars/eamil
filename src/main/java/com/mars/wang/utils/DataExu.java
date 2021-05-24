@@ -5,14 +5,10 @@ import com.mars.wang.MyException;
 import com.mars.wang.dao.*;
 import com.mars.wang.domain.*;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.helpers.DateTimeDateFormat;
-import org.apache.poi.openxml4j.exceptions.OLE2NotOfficeXmlFileException;
-import org.apache.taglibs.standard.extra.spath.Step;
 
-import javax.sound.midi.SoundbankResource;
-import javax.xml.transform.dom.DOMLocator;
+
 import java.math.BigDecimal;
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -213,6 +209,12 @@ public class DataExu {
                 }
 
         }else {
+            if (y||stName.length()<=7){
+
+                privateCus.setAbbreviation("个人客户");
+            }else {
+                privateCus.setAbbreviation("经销商");
+            }
             //todo
             System.out.println("此地址无法查询");
 
