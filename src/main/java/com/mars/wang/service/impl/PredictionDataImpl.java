@@ -8,14 +8,13 @@ import com.mars.wang.dao.EmailDao1027;
 import com.mars.wang.dao.EmailDao1028;
 import com.mars.wang.dao.EmailDao1039;
 import com.mars.wang.domain.*;
-import com.mars.wang.service.PredictionDataService;
-import com.mars.wang.utils.DataExu;
+
 import com.mars.wang.utils.POI;
 import com.mars.wang.utils.SqlSessionUtil;
-import com.mars.wang.utils.getdata.Parent;
+
 import org.apache.ibatis.session.SqlSession;
 
-import javax.sound.midi.SoundbankResource;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +30,8 @@ public class PredictionDataImpl  {
 
 
     public static void predictionData(Map map) throws ParseException, MyException {
-        List<Customer> customers = new ArrayList<>();
-        String date ="21/05/21";
+        List<Object> customers = new ArrayList<>();
+        String date ="2021/05/21";
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         EmailDao1025 mapper1025 = sqlSession.getMapper(EmailDao1025.class);
         EmailDao1027 mapper1027 = sqlSession.getMapper(EmailDao1027.class);
@@ -54,16 +53,47 @@ public class PredictionDataImpl  {
 
 
 
-        /*for (ParentData data1025:predictions){
+        for (ParentData data1025:predictions){
 
 
             DataPrediction instance = data1025.getINSTANCE();
+            if (instance==null){
 
-            System.out.println(instance);
+                Customer cus = data1025.getCus();
+
+                customers.add(cus);
+
+            }else {
+
+                System.out.println(instance);
+
+            }
 
 
-        }*/
-        System.out.println("集合==="+predictions.size());
+
+
+
+
+        }
+        System.out.println("集合==="+customers.size());
+        try {
+            if(customers.size()>0){
+
+                String s = POI.writeExcel("", customers, new Customer());
+
+            }
+            for (Object customer:customers){
+
+                System.out.println("不通过=="+customer.toString());
+
+            }
+        }catch (Exception e){
+
+
+        }
+
+
+
         /*System.out.println("集合数量="+customers.size());
         String path="";
         for (Customer customer:customers){
