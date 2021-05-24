@@ -111,15 +111,9 @@ public class Data1028 extends  ParentData implements Serializable {
 
     @Override
     public void setShipToP() {
-        String code=this.consigneekey;
-        System.out.println("000"+this.consigneekey.indexOf("000"));
 
-        if (this.consigneekey.indexOf("000")==0){
-            code = consigneekey.replace("000","");
 
-        }
-
-        super.dataPrediction.setShipToP(code);
+        super.dataPrediction.setShipToP(this.consigneekey);
     }
     //收货地址
     @Override
