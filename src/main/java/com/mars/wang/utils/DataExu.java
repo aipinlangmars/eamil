@@ -152,7 +152,7 @@ public class DataExu {
 
         //判断stname是否有电话号码
         try{
-
+            //todo
             cusName = name.substring(stNameLen-8,stNameLen);
 
             Integer.parseInt(cusName);
@@ -244,7 +244,14 @@ public class DataExu {
 
     //客户信息表是否有
     public static Customer getCus(String cusCode,String stName,String address,String telephone,String[] addressP,String province) throws MyException {
-        String replace = cusCode.replace("000", "");
+        //替换客户代码的三个零
+
+        String replaceCode = cusCode;
+        if (cusCode.indexOf("000")==0){
+
+           replaceCode = cusCode.replace("000", "");
+        }
+
         int length = addressP.length;
         String addressNsp;
 
@@ -254,10 +261,10 @@ public class DataExu {
 
         }
 
-        Customer privateCus = customerDao.searchByCode(cusCode);
+        Customer privateCus = customerDao.searchByCode(replaceCode);
 
-        DistributorName distributorName = distributorNameDao.searchByCode(cusCode);
-
+        DistributorName distributorName = distributorNameDao.searchByCode(replaceCode);
+        //未查询到客户信息 可能为个人客户
         if (privateCus==null&&distributorName==null){
 
             if (length==3){
@@ -270,8 +277,8 @@ public class DataExu {
                 addressNsp = addressP[0];
             }
 
-            privateCus = getPrivateCus(cusCode,stName, address, telephone,addressNsp,province);
-
+            privateCus = getPrivateCus(replaceCode,stName, address, telephone,addressNsp,province);
+        //好孩子等经销商
         }else if (distributorName!=null){
             if (length==3){
 
@@ -286,13 +293,14 @@ public class DataExu {
 
             privateCus.setAddress(addressNsp);
             privateCus.setAbbreviation("");
-            privateCus.setC_Code(cusCode);
+            privateCus.setC_Code(replaceCode);
             privateCus.setC_Name(distributorName.getCusName());
             privateCus.setCity(distributorName.getCity());
             privateCus.setPhone(telephone);
             privateCus.setTelephone(telephone);
             privateCus.setFlag(true);
         }else {
+            //客户信息已维护
             privateCus.setFlag(true);
 
         }
