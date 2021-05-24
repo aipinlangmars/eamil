@@ -85,7 +85,7 @@ public class Data1039  extends  ParentData implements Serializable {
     @Override
     public void setShipDateP() throws ParseException {
 
-        String dateFormat = DataExu.getSameDate(this.packlist);
+        String dateFormat = DataExu.getSameDate(this.wMSShipDate);
 
 
         super.dataPrediction.setShipDateP(dateFormat);
