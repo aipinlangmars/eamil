@@ -54,10 +54,10 @@ public class Data1027  extends ParentData implements Serializable {
         strings[1] = destaddr2;
         strings[2] = destaddr3;
 
-        String addressP = destaddr1+destaddr2+destaddr3;
+        //String addressP = destaddr1+destaddr2+destaddr3;
         Customer cus=null;
         try {
-           cus = DataExu.getCus(this.shipmentnbr,this.destfacilitynm,"%"+destaddr1+"%",this.shiptocustnbr,strings,this.destcity);
+           cus = DataExu.getCus(this.shiptocustnbr,this.destfacilitynm,destaddr1,this.phonenumber,strings,this.destcity);
         }catch (Exception e){
 
             cus = null;
@@ -127,6 +127,7 @@ public class Data1027  extends ParentData implements Serializable {
 
     @Override
     public void setShipToP() {
+
 
         super.dataPrediction.setShipToP(this.shiptocustnbr);
     }
