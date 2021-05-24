@@ -26,9 +26,7 @@ public abstract class ParentData {
  public abstract void setPackListP();
  public abstract void setShipDateP() throws ParseException;
  public abstract void setShipHub();
- public abstract void setDestinationCity() throws MyException;
- public abstract void setShipToP();
- public abstract void setAddressP() throws MyException;
+
  public abstract void setCtnsP();
  public abstract void setUnitP();
  public abstract void setTransportType() throws MyException;
@@ -38,10 +36,38 @@ public abstract class ParentData {
  public abstract void setCarrierP() throws MyException;
  public abstract void setNoteRemark() throws MyException, ParseException;
  public abstract void setAbnormalIssue();
- public abstract void setShortN() throws MyException;
- public abstract void setCusName() throws MyException;
- public abstract void setConsignee() throws MyException;
- public abstract void setTelephoneP() throws MyException;
- public abstract void setPhoneP() throws MyException;
+ //customer
+ //目的城市
+ public void setDestinationCity(Customer cus){
+  dataPrediction.setDestinationCity(cus.getCity());
+
+ }
+ //客户代码
+ public void setShipToP(Customer cus){
+  dataPrediction.setShipToP(cus.getC_Code());
+ }
+ //收货地址
+ public void setAddressP(Customer cus) throws MyException{
+  dataPrediction.setAddressP(cus.getAddress());
+ };
+ public void setShortN(Customer cus) throws MyException{
+  dataPrediction.setShortN(cus.getAbbreviation());
+
+ };
+ public void setCusName(Customer cus) throws MyException{
+
+  dataPrediction.setCusName(cus.getC_Name());
+ }
+ public void setConsignee(Customer cus) throws MyException{
+  dataPrediction.setConsignee(cus.getContact());
+ };
+ public void setTelephoneP(Customer cus) throws MyException{
+  dataPrediction.setTelephoneP(cus.getTelephone());
+
+ };
+ public void setPhoneP(Customer cus) throws MyException{
+
+  dataPrediction.setPhoneP(cus.getPhone());
+ };
 
 }
