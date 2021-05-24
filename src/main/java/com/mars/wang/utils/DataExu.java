@@ -249,7 +249,9 @@ public class DataExu {
         String replaceCode = cusCode;
         if (cusCode.indexOf("000")==0){
 
-           replaceCode = cusCode.replace("000", "");
+           replaceCode = cusCode.replaceFirst("000", "");
+
+
         }
 
         int length = addressP.length;
