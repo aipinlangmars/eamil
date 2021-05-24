@@ -260,7 +260,7 @@ public class Data1025  extends ParentData implements Serializable{
                 return null;
             }else {
 
-                getCus();
+
                 setCreateDate();
                 setBuP();
                 setPackListP();
