@@ -41,15 +41,15 @@ public class DataExu {
 
             return "bu异常";
         }
-        if ("10".equals(bu) || "AP".equals(bu) || "APP".equals(bu)) {
+        if ("10".equals(bu) || bu.indexOf("AP")!=-1) {
 
             type = "APP";
 
-        } else if ("20".equals(bu) || "FW".equals(bu)) {
+        } else if ("20".equals(bu) || bu.indexOf("FW")!=-1) {
 
             type = "FW";
 
-        } else if ("30".equals(bu) || "EQ".equals(bu)) {
+        } else if ("30".equals(bu) || bu.indexOf("EQ")!=-1) {
 
             type = "EQ";
 
@@ -118,7 +118,7 @@ public class DataExu {
     }
 
     //目的城市
-    public static City getCity(String city, boolean flag) throws MyException {
+    public static City getCity(String city) throws MyException {
 
         City cityC = cityDao.searchByCity(city);
         //todo
@@ -163,7 +163,7 @@ public class DataExu {
 
         }
 
-        List<String> citys = privateCityDao.getCity(address.trim());
+        List<String> citys = privateCityDao.getCity("%"+address.replaceAll(" ","")+"%");
         if (citys.size()>0){
             city2 = citys.get(0);
 
@@ -216,7 +216,7 @@ public class DataExu {
                 privateCus.setAbbreviation("经销商");
             }
             //todo
-            System.out.println("此地址无法查询");
+            //System.out.println("此地址无法查询");
 
             privateCus.setC_Code(code);
             privateCus.setContact(stName);
@@ -281,7 +281,7 @@ public class DataExu {
                 addressNsp = addressP[0];
             }
 
-            privateCus = getPrivateCus(replaceCode,stName, address, telephone,addressNsp,province);
+            privateCus = getPrivateCus(replaceCode,stName, address, telephone,addressNsp.trim(),province);
         //好孩子等经销商
         }else if (distributorName!=null){
             if (length==3){
@@ -295,10 +295,11 @@ public class DataExu {
             }
             privateCus = new Customer();
 
-            privateCus.setAddress(addressNsp);
+            privateCus.setAddress(addressNsp.trim());
             privateCus.setAbbreviation("");
             privateCus.setC_Code(replaceCode);
             privateCus.setC_Name(distributorName.getCusName());
+            privateCus.setContact(stName);
             privateCus.setCity(distributorName.getCity());
             privateCus.setPhone(telephone);
             privateCus.setTelephone(telephone);
@@ -378,24 +379,25 @@ public class DataExu {
         String remark;
         String crd = crdDate.trim();
         boolean flag = isPsst(psst);
+        String sameDate = getSameDate(eta);
         //1028
         if (crd.indexOf("202") != -1 && crd.indexOf("/") != -1) {
 
-            crd1028 = crd.substring(crd.indexOf("20"), crd.length());
-            crd1028 = getDateFormat(crd1028);
+            crd1028 = crd.substring(crd.indexOf("202"), crd.length());
+            crd1028 = getSameDate(crd1028);
             //返回备注
-            return getCRDString(equalsDate(crd1028,eta),"");
+            return getCRDString(equalsDate(crd1028,sameDate),"");
 
         }
         if (crdDate.length()==8&&flag){
-            String s = equalsDate(crdDate, eta);
+            String s = equalsDate(crd, sameDate);
 
            return getCRDString(s,"PSST");
 
 
         }
         if (crdDate.length()==8 && !flag){
-            String s = equalsDate(crdDate, eta);
+            String s = equalsDate(crd, sameDate);
 
             return getCRDString(s,"");
 
@@ -512,34 +514,38 @@ public class DataExu {
     public static String equalsDate(String crd,String eta) throws ParseException {
         int length = crd.length();
         if(length==0){
-            return getDateFormat(crd);
+            return eta;
         }
 
 
         SimpleDateFormat etaFormat = new SimpleDateFormat("yyyy/MM/dd");
 
-        String sameDate = getSameDate(crd);
+        String sameEta = getSameDate(eta);
+        String sameCrd = getSameDate(crd);
 
 
 
 
         try{
-            Long crdL = etaFormat.parse(crd).getTime();
+            Long crdL = etaFormat.parse(sameCrd).getTime();
 
-            Long etaL = etaFormat.parse(eta).getTime();
+            Long etaL = etaFormat.parse(sameEta).getTime();
+
+            System.out.println("crd"+crdL+"=====eta"+etaL);
+
             //有CRD
             if (crdL-etaL>0) {
 
-                return getDateFormat(crd);
+                return getSameDate(sameCrd);
             }else {
 
 
-                return getDateFormat(eta);
+                return "";
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "";
 
         }
 

@@ -47,4 +47,5 @@ public class PrivateCus {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
 }

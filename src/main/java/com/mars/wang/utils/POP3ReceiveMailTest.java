@@ -147,7 +147,7 @@ public class POP3ReceiveMailTest {
                 dataType="1028";
             }else if(subject.indexOf("pre-advice")!=-1){
                 dataType="1025";
-            }else if(subject.indexOf("RUBO-")!=-1){
+            }else if(subject.indexOf("RUBO-预报")!=-1||subject.indexOf("RUBO-下午")!=-1||subject.indexOf("RUBO-中午")!=-1){
                 dataType="1027";
             }
             //boolean flag = subject.indexOf("1039-OB-")!=-1||subject.indexOf("RUBO-预报")!=-1||subject.indexOf("pre-advice")!=-1||subject.indexOf("RUBO Shipment Plan")!=-1;

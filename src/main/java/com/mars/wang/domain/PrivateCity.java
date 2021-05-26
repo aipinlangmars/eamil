@@ -3,18 +3,18 @@ package com.mars.wang.domain;
 import java.io.Serializable;
 
 public class PrivateCity implements Serializable {
-    private int id;
+    private String code;
 
     private String city;
 
     private String address;
 
-    public int getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCode(String id) {
+        this.code = id;
     }
 
     public String getCity() {
@@ -31,5 +31,14 @@ public class PrivateCity implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "PrivateCity{" +
+                "code='" + code + '\'' +
+                ",wzr city='" + city + '\'' +
+                ",wzr address='" + address + '\'' +
+                '}';
     }
 }

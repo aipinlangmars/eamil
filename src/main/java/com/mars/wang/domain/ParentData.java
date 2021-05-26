@@ -3,7 +3,9 @@ package com.mars.wang.domain;
 import com.mars.wang.MyException;
 import com.mars.wang.utils.DataExu;
 import com.mars.wang.utils.getdata.Parent;
+import com.mars.wang.vo.OB;
 
+import javax.xml.crypto.Data;
 import java.text.ParseException;
 import java.util.List;
 
@@ -11,16 +13,67 @@ public abstract class ParentData {
 
 
  DataPrediction dataPrediction = new DataPrediction();
+ private boolean flag = true;
 
+ public boolean isFlag() {
+  return flag;
+ }
+
+ public void setFlag(boolean flag) {
+  this.flag = flag;
+ }
+
+ public abstract OB getOB();
+ public abstract Customer getOldCus();
 
 
  public DataPrediction getINSTANCE() throws MyException, ParseException {
+  Customer customer = getCus(getOldCus());
+  OB ob = getOB();
+  City leadCity = getCityLead(customer.getCity());
+  //抽象方法执行
+  setCreateDate();
+  setBuP();
+  setPackListP();
+  setShipDateP();
+  setShipHub();
+  setCtnsP();
+  setUnitP();
+  setAbnormalIssue();
+  //具体方法执行
+  setDestinationCity(customer) ;
+  setShipToP(customer);
+  setAddressP(customer);
+  setShortN(customer) ;
+  setCusName(customer) ;
+  setConsignee(customer);
+  setTelephoneP(customer);
+  setPhoneP(customer) ;
+  setLead(leadCity,ob);
+
 
 
   return this.dataPrediction;
  }
+ public City getCityLead(String city) throws MyException {
+  City city1 = DataExu.getCity(city);
 
- public abstract Customer  getCus() throws MyException;
+  return city1;
+
+ };
+ public  Customer  getCus(Customer customer) throws MyException{
+  String[] akas = customer.getAddress().split("aka");
+  String  address1=null;
+  for (int i=0;i<akas.length;i++){
+   if (akas[i].length()>5){
+    address1 = akas[i];
+   }
+  }
+
+  Customer cus = DataExu.getCus(customer.getC_Code(), customer.getC_Name(), address1, customer.getTelephone(), akas, customer.getProvince());
+
+  return cus;
+ };
  public abstract void setCreateDate();
  public abstract void setBuP();
  public abstract void setPackListP();
@@ -29,13 +82,38 @@ public abstract class ParentData {
 
  public abstract void setCtnsP();
  public abstract void setUnitP();
- public abstract void setTransportType() throws MyException;
- public abstract void setLead() throws MyException;
- public abstract void setEta() throws MyException, ParseException;
- public abstract void setStatus() throws MyException;
- public abstract void setCarrierP() throws MyException;
- public abstract void setNoteRemark() throws MyException, ParseException;
  public abstract void setAbnormalIssue();
+ //City
+ public void setLead(City city,OB ob) throws MyException, ParseException {
+  boolean air = DataExu.isAir(ob.getCarrierCode());
+  String lead;
+  String eta;
+
+  if (air){
+   lead = city.getAirTime()+"h";
+   dataPrediction.setStatus("已提货");
+   dataPrediction.setCarrierP(city.getAirCarrier());
+   dataPrediction.setTransportType("空运");
+
+
+
+  }else {
+   lead = city.getLeadTime();
+   dataPrediction.setStatus("干线运输");
+   dataPrediction.setCarrierP(city.getCarrier());
+   dataPrediction.setTransportType("公路");
+  }
+  dataPrediction.setLead(lead);
+  //预计到货时间
+  eta = DataExu.getFormatEta(ob.getShipDate(),lead);
+  dataPrediction.setEta(eta);
+  //托运单备注
+  String crdRemark = DataExu.getCrdRemark(ob.getPsst(), ob.getCrd(), eta);
+  dataPrediction.setNoteRemark(crdRemark);
+
+
+ }
+
  //customer
  //目的城市
  public void setDestinationCity(Customer cus){
@@ -43,7 +121,7 @@ public abstract class ParentData {
 
  }
  //客户代码
- public void setShipToP(Customer cus){
+ public void setShipToP(Customer cus) throws MyException {
   dataPrediction.setShipToP(cus.getC_Code());
  }
  //收货地址

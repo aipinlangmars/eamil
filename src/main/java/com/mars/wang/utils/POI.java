@@ -1,15 +1,12 @@
 package com.mars.wang.utils;
 
+import com.mars.wang.Demo2;
 import com.mars.wang.domain.Customer;
+
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -17,6 +14,7 @@ import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class POI {
@@ -53,33 +51,40 @@ public class POI {
 
         }*/
     }
-    public static List<List<String>> getClassMap(List<Object> list,Object object){
-        String[] excelHeads = getExcelHeads(object);
+    //值列表
+    public static List<List<String>> getClassMap(List<Object> list){
         List<List<String>> listS= new ArrayList<>();
-
-
             for(Object o:list){
+                //添加一行数据
+                //System.out.println(o);
 
                 List<String> value = getValue(o);
 
                 listS.add(value);
-
-
             }
-
-
 
         return listS;
     }
+    //解析toString值
     public static List<String> getValue(Object object){
         List<String> list = new ArrayList<>();
-        String[] split = object.toString().split("'");
+        String[] split = object.toString().split(",wzr");
         for (int i = 0;i<split.length;i++){
             //过滤其他值
-            if (split[i].indexOf("=")!=-1||split[i].indexOf("}")!=-1){
-                continue;
+            String substring;
+            String value = split[i];
+
+            if (value.indexOf("'")!=-1){
+                 substring = value.substring(value.indexOf("'") + 1, value.lastIndexOf("'"));
+
+
+            }else {
+
+                substring = value.split("=")[1];
+
             }
-            list.add(split[i]);
+
+            list.add(substring);
 
         }
 
@@ -91,29 +96,75 @@ public class POI {
         String string = object.toString();
         String title;
         String[] split = string.split("=");
-        String[] strings = new String[split.length-1];
-        for (int i =0;i<split.length;i++){
-            title = split[i];
+        String[] strings = new String[split.length-1];//末尾的null不要
+        String fileName = string.split("\\{")[0];
+        InputStream in=null;
+        String head=null;
+        Properties prop=null;
 
-            if (title.indexOf(",")!=-1){
-                strings[i]=title.split(",")[1];
+        try {
+            in = POI.class.getClassLoader().getResourceAsStream(fileName+".properties");
+            prop = new Properties();
+            prop.load(in);
 
-            }else if (title.indexOf("{")!=-1){
-                strings[i]=title.split("\\{")[1];
+
+        }catch (Exception e){
+            System.out.println("未找到字段配置文件，读取数据库字段！");
+        }
+        if (in==null){
+
+            for (int i =0;i<strings.length;i++){
+                title = split[i];
+
+
+                if (title.indexOf(",wzr")!=-1){
+                    head=title.split(",wzr ")[1];
+
+                }else if (title.indexOf("{")!=-1){
+                    head=title.split("\\{")[1];
+                }
+                strings[i] = head;
+
+            }
+        }else {
+            for (int i =0;i<strings.length;i++){
+                title = split[i];
+
+
+                if (title.indexOf(",")!=-1){
+                    head=title.split(",wzr ")[1];
+
+                }else if (title.indexOf("{")!=-1){
+                    head=title.split("\\{")[1];
+                }
+                try {
+                    String resultName2=new String(prop.getProperty(head).getBytes("ISO-8859-1"),"gbk");
+                    strings[i] = resultName2;
+                }catch (Exception e){
+                    e.printStackTrace();
+                    System.out.println("中文转换异常！"+title);
+                }
+
+
+
             }
 
+
+
         }
+
+
 
         return strings;
 
     }
 
 
-    public static String writeExcel(String filePath, List<Object> list,Object target) throws IOException {
+    public static String writeExcel(String uuid, List<Object> list,Object target) throws IOException {
 
 
         //定义表头
-        String path = "E:\\powernode\\Excel\\bodyPart";
+        String path = "D:\\powernode\\Excel\\bodyPart";
 
         String[] title=getExcelHeads(target);
 
@@ -124,31 +175,123 @@ public class POI {
 //创建第一行
         XSSFRow row=sheet.createRow(0);
         XSSFCell cell=null;
+//单元格边框及颜色
+        XSSFCellStyle style= workbook.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);//水平居中显示
+
+        style.setBorderBottom(BorderStyle.THIN);//下边框
+        style.setBorderLeft(BorderStyle.THIN);//左边框
+        style.setBorderRight(BorderStyle.THIN);//右边框
+        style.setBorderTop(BorderStyle.THIN);//上边框
+
+        //style.setBottomBorderColor(IndexedColors.BLACK.getIndex());
+        XSSFCellStyle styleHead = workbook.createCellStyle();
+
+        styleHead.setAlignment(HorizontalAlignment.CENTER);
+        styleHead.setFillForegroundColor(IndexedColors.AQUA.getIndex());
+        styleHead.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        XSSFFont font = workbook.createFont();
+        font.setColor(IndexedColors.WHITE.getIndex());
+        font.setBold(true);
+        styleHead.setFont(font);
+
+
+
 //插入第一行数据的表头
+        List<List<String>> classMap = getClassMap(list);
+        List<String> strings = classMap.get(0);
         for(int i=0;i<title.length;i++){
+            String value = strings.get(i);
             cell=row.createCell(i);
             cell.setCellValue(title[i]);
-        }
-//写入数据
-        List<List<String>> classMap = getClassMap(list, new Customer());
-        for (int rows=1;rows<=classMap.size();rows++){
+            cell.setCellStyle(styleHead);
 
-            XSSFRow row1 = sheet.createRow(rows);
-            List<String> list1 = classMap.get(rows - 1);
-            for (int col = 0;col<list1.size();col++){
-                row1.createCell(col).setCellValue(list1.get(col));
+            //cell.setCellStyle(styleHead);
+            //单元格宽度
+            int columnWidth = strings.get(i).length();
+            SimpleDateFormat dateFormat = new SimpleDateFormat();
+            boolean flag=false;
+            if (columnWidth>0){
+                try {
+
+
+                    int i1 = Integer.parseInt(value);
+
+
+                    flag=true;
+                }catch (Exception e){
+                    e.printStackTrace();
+
+                    System.out.println("非时间和数值");
+                    if (value.indexOf("2021/")!=-1||value.indexOf("2021-")!=-1){
+                        flag = true;
+                    }else {
+
+                        flag = false;
+                    }
+
+                }
+            }
+
+
+
+            if (columnWidth>0&&flag){
+                //数字
+                sheet.setColumnWidth(i,10*2*256+184);
+
+            }else if (columnWidth>0&&!flag){
+                //中文显示宽度
+                sheet.setColumnWidth(i,columnWidth*3*256+184);
+            }else {
+
+                sheet.setColumnWidth(i,20*256+184);
             }
 
         }
-        UUID uuid = UUID.randomUUID();
+//写入数据
+
+        for (int rows=1;rows<=classMap.size();rows++){
+
+            XSSFRow row1 = sheet.createRow(rows);
+            List<String> listRow = classMap.get(rows - 1);
+            for (int col = 0;col<listRow.size();col++){
+                XSSFCell cell1 ;
+                String s = listRow.get(col);
+                cell1 = row1.createCell(col);
+                if ("箱数".equals(title[col])||"件数".equals(title[col])){
+                    style.setDataFormat(workbook.createDataFormat().getFormat("0"));
+                    int i = Integer.valueOf(s);
+                    cell1.setCellValue(i);
+                }else {
+
+                    cell1.setCellValue(s);
+
+                }
+                //边框
+                cell1.setCellStyle(style);
+
+
+
+            }
+
+        }
+
         if (!new File(path).exists()){
             new File(path).mkdirs();
         }
-        String fileName = "\\"+ uuid.toString().replace("-", "")+".xlsx";
+
+
+        String fileName =path+ "\\"+ uuid+".xlsx";
+
+        //String encoding = System.getProperty("file.encoding");
+
+
 
 //创建excel文件
+        //String value = new String(fileName.getBytes("GBK"),encoding);
+        System.out.println("===path====="+fileName);
 
-        File file=new File(path+fileName);
+        File file=new File(fileName);
 
 
         FileOutputStream stream;

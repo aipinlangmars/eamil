@@ -3,12 +3,13 @@ package com.mars.wang.domain;
 import com.mars.wang.MyException;
 import com.mars.wang.utils.DataExu;
 import com.mars.wang.utils.Fomat;
+import com.mars.wang.vo.OB;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
-public class Data1039  extends  ParentData implements Serializable {
+public class Data1039 extends ParentData  implements Serializable {
 
     private String trailerNumber ;
     private String trailerType;
@@ -27,38 +28,118 @@ public class Data1039  extends  ParentData implements Serializable {
     private String cTns;
     private String unit;
 
-   /* private Customer customer = getCus();
-    private City cityC = getCityClass();
-    private Boolean flag = DataExu.isAir(this.carrierCode);*/
 
 
-    //todo
-    public Customer getCus() throws MyException {
-        String[] strings = new String[3];
-        strings[0] = address1;
+    @Override
+    public OB getOB() {
+        OB ob = new OB();
+        ob.setCarrierCode(this.carrierCode);
+        ob.setCity(this.city);
+        ob.setCrd(this.crdDate);
+        ob.setPsst("");
+        ob.setShipDate(this.wMSShipDate);
 
+        return ob;
+    }
 
+    @Override
+    public Customer getOldCus() {
+        String addresses;
+        if (super.isFlag()){
+            addresses = address1+" "+"aka";
+        }else {
 
-        Customer cus=null;
-        try {
-           cus = DataExu.getCus(this.shipTo,stName,"%"+address1+"%",shipToPhoneNbr,strings,this.city);
-        }catch (Exception e){
-
-            cus = null;
-
+            addresses = address1;
         }
 
-        return cus;
+        Customer customer = new Customer();
+        customer.setC_Code(this.shipTo);
+        customer.setC_Name(this.stName);
+        customer.setContact(this.stName);
+        customer.setCity(this.city);
+        customer.setAddress(addresses);
+        customer.setTelephone(this.shipToPhoneNbr);
+        customer.setPhone(this.shipToPhoneNbr);
+        return customer;
+    }
+    @Override
+    public DataPrediction getINSTANCE() throws MyException, ParseException {
+        Customer customer = getCus(getOldCus());
+        if (!customer.getFlag()){
 
+            return null;
+        }
 
+        return super.getINSTANCE();
     }
 
-    public City getCityClass() throws MyException {
+    @Override
+    public void setLead(City city, OB ob) throws MyException, ParseException {
 
-
-
-        return null;
+        ob = getOB();
+        Customer cus = getCus(getOldCus());
+        ob.setCity(cus.getCity());
+        city = getCityLead(cus.getCity());
+        super.setLead(city, ob);
     }
+
+    @Override
+    public City getCityLead(String city) throws MyException {
+        Customer customer = getCus(getOldCus());
+
+        return super.getCityLead(customer.getCity());
+    }
+
+    @Override
+    public Customer getCus(Customer customer) throws MyException {
+        customer = getOldCus();
+        return super.getCus(customer);
+    }
+
+    @Override
+    public void setShipToP(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setShipToP(cus);
+    }
+
+    @Override
+    public void setAddressP(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setAddressP(cus);
+    }
+
+    @Override
+    public void setShortN(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setShortN(cus);
+    }
+
+    @Override
+    public void setCusName(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setCusName(cus);
+    }
+
+    @Override
+    public void setConsignee(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setConsignee(cus);
+    }
+
+    @Override
+    public void setTelephoneP(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setTelephoneP(cus);
+    }
+
+    @Override
+    public void setPhoneP(Customer cus) throws MyException {
+        cus = getCus(getOldCus());
+        super.setPhoneP(cus);
+    }
+
+
+
 
     //创建时间
     @Override
@@ -93,110 +174,25 @@ public class Data1039  extends  ParentData implements Serializable {
 
     @Override
     public void setShipHub() {
-        super.dataPrediction.setShipHub("太仓3RD");
+        super.dataPrediction.setShipHub("BZ");
     }
 
-    @Override
-    public void setDestinationCity() throws MyException {
 
-        super.dataPrediction.setDestinationCity(getCus().getCity());
-    }
-
-    @Override
-    public void setShipToP() {
-
-        super.dataPrediction.setShipToP(this.shipTo);
-    }
-    //收货地址
-    @Override
-    public void setAddressP() throws MyException {
-        String address ;
-
-        if (getCus().getAddress()==null){
-            address = this.address1;
-
-        }else {
-            address = getCus().getAddress();
-        }
-
-        super.dataPrediction.setAddressP(address);
-    }
     //箱数
     @Override
     public void setCtnsP() {
-        int num = Integer.parseInt(this.cTns);
+       // int num = Integer.parseInt(this.cTns);
 
-        super.dataPrediction.setCtnsP(num);
+        super.dataPrediction.setCtnsP(this.cTns);
     }
     //件数
     @Override
     public void setUnitP() {
-        int num = Integer.parseInt(this.unit);
+        //int num = Integer.parseInt(this.unit);
 
-        super.dataPrediction.setUnitP(num);
+        super.dataPrediction.setUnitP(this.unit);
     }
 
-    @Override
-    public void setTransportType() throws MyException {
-        String type;
-        boolean air = DataExu.isAir(this.carrierCode);
-        try{
-            type = air?"空运":"公路";
-            super.dataPrediction.setTransportType(type);
-
-        }catch (Exception e){
-
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void setLead() throws MyException {
-        String lead1 = DataExu.getLead(this.carrierCode, getCus().getCity());
-        super.dataPrediction.setLead(lead1);
-    }
-
-    @Override
-    public void setEta() throws MyException, ParseException {
-        String formatEta = DataExu.getFormatEta(this.wMSShipDate, DataExu.getLead(this.carrierCode, getCus().getCity()));
-
-
-        super.dataPrediction.setEta(formatEta);
-    }
-
-    @Override
-    public void setStatus() throws MyException {
-        boolean air = DataExu.isAir(this.carrierCode);
-        String tra;
-        if (air){
-
-            tra = "已提货";
-        }else {
-
-            tra = "干线运输";
-        }
-
-        super.dataPrediction.setStatus(tra);
-    }
-
-    @Override
-    public void setCarrierP() throws MyException {
-
-        String carrier = DataExu.getCarrier(DataExu.isAir(this.carrierCode), this.carrierCode);
-
-
-        super.dataPrediction.setCarrierP(carrier);
-    }
-
-    @Override
-    public void setNoteRemark() throws MyException, ParseException {
-        String formatEta = DataExu.getFormatEta(this.wMSShipDate, DataExu.getLead(this.carrierCode, getCus().getCity()));
-        //todo
-        String crdRemark = DataExu.getCrdRemark("", "", formatEta);
-
-        super.dataPrediction.setNoteRemark(crdRemark);
-    }
 
     @Override
     public void setAbnormalIssue() {
@@ -204,67 +200,9 @@ public class Data1039  extends  ParentData implements Serializable {
         super.dataPrediction.setAbnormalIssue("");
     }
 
-    @Override
-    public void setShortN() throws MyException {
-
-        super.dataPrediction.setShortN(getCus().getAbbreviation());
-    }
-
-    @Override
-    public void setCusName() throws MyException {
-
-        super.dataPrediction.setCusName(getCus().getC_Name());
-    }
-
-    @Override
-    public void setConsignee() throws MyException {
-
-        super.dataPrediction.setConsignee(getCus().getContact());
-    }
-
-    @Override
-    public void setTelephoneP() throws MyException {
-
-        super.dataPrediction.setTelephoneP(getCus().getTelephone());
-    }
-
-    @Override
-    public void setPhoneP() throws MyException {
-
-        super.dataPrediction.setTelephoneP(getCus().getTelephone());
-    }
 
 
-    @Override
-    public DataPrediction getINSTANCE() throws ParseException, MyException {
-        if (!getCus().getFlag()){
 
-            return null;
-        }
-        setCreateDate();
-        setBuP();
-        setPackListP();
-        setShipDateP();
-        setShipHub();
-        setDestinationCity() ;
-        setShipToP();
-        setAddressP();
-        setCtnsP();
-        setUnitP();
-        setTransportType() ;
-        setLead() ;
-        setEta() ;
-        setStatus();
-        setCarrierP();
-        setNoteRemark();
-        setAbnormalIssue();
-        setShortN() ;
-        setCusName() ;
-        setConsignee();
-        setTelephoneP();
-        setPhoneP() ;
-        return super.dataPrediction;
-    }
 
     public void setTrailerNumber(String trailerNumber) {
         this.trailerNumber = trailerNumber;
@@ -397,20 +335,22 @@ public class Data1039  extends  ParentData implements Serializable {
     @Override
     public String toString() {
         return "Data1039{" +
-                "carrierCode='" + carrierCode + '\'' +
-                ", packlist='" + packlist + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", wMSShipDate='" + wMSShipDate + '\'' +
-                ", shipTo='" + shipTo + '\'' +
-                ", crdDate='" + crdDate + '\'' +
-                ", stName='" + stName + '\'' +
-                ", shipToPhoneNbr='" + shipToPhoneNbr + '\'' +
-                ", address1='" + address1 + '\'' +
-                ", divs='" + divs + '\'' +
-                ", volume='" + volume + '\'' +
-                ", cTns='" + cTns + '\'' +
-                ", unit='" + unit + '\'' +
+                "trailerNumber='" + trailerNumber + '\'' +
+                ",wzr trailerType='" + trailerType + '\'' +
+                ",wzr carrierCode='" + carrierCode + '\'' +
+                ",wzr packlist='" + packlist + '\'' +
+                ",wzr province='" + province + '\'' +
+                ",wzr city='" + city + '\'' +
+                ",wzr wMSShipDate='" + wMSShipDate + '\'' +
+                ",wzr shipTo='" + shipTo + '\'' +
+                ",wzr crdDate='" + crdDate + '\'' +
+                ",wzr stName='" + stName + '\'' +
+                ",wzr shipToPhoneNbr='" + shipToPhoneNbr + '\'' +
+                ",wzr address1='" + address1 + '\'' +
+                ",wzr divs='" + divs + '\'' +
+                ",wzr volume='" + volume + '\'' +
+                ",wzr cTns='" + cTns + '\'' +
+                ",wzr unit='" + unit + '\'' +
                 '}';
     }
 }

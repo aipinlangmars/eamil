@@ -12,10 +12,7 @@ import com.mars.wang.vo.POIVo;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.internet.MimeMessage;
-import javax.sound.midi.SoundbankResource;
-import java.io.InputStream;
+
 import java.text.ParseException;
 import java.util.*;
 
@@ -39,7 +36,7 @@ public class EmailServiceImpl1039  {
             System.out.println("收件箱="+emails);
             int count=0;
             POIVo vo;
-            for (int i = emails-1;i>emails-100; i-- ){
+            for (int i = emails-1;i>emails-200; i-- ){
 
                 //System.out.println(message.getSubject());
 

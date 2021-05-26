@@ -9,6 +9,7 @@ import com.mars.wang.dao.EmailDao1028;
 import com.mars.wang.dao.EmailDao1039;
 import com.mars.wang.domain.*;
 
+import com.mars.wang.utils.DataExu;
 import com.mars.wang.utils.POI;
 import com.mars.wang.utils.SqlSessionUtil;
 
@@ -16,10 +17,7 @@ import org.apache.ibatis.session.SqlSession;
 
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PredictionDataImpl  {
 
@@ -30,8 +28,8 @@ public class PredictionDataImpl  {
 
 
     public static void predictionData(Map map) throws ParseException, MyException {
-        List<Object> customers = new ArrayList<>();
-        String date ="2021/05/21";
+        List<Customer> customers = new ArrayList<>();
+        String date ="2021/05/26";
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         EmailDao1025 mapper1025 = sqlSession.getMapper(EmailDao1025.class);
         EmailDao1027 mapper1027 = sqlSession.getMapper(EmailDao1027.class);
@@ -44,93 +42,98 @@ public class PredictionDataImpl  {
         List<ParentData> data1028s = mapper1028.getList1028(date);
         System.out.println(data1027s.size());
 
-        List<ParentData> predictions = new ArrayList<>();
+        List<ParentData> parentData = new ArrayList<>();
 
-        predictions.addAll(data1025s);
-        predictions.addAll(data1027s);
-        predictions.addAll(data1028s);
-        predictions.addAll(data1039s);
+        List<Object> predictions = new ArrayList<>();
 
+        parentData.addAll(data1025s);
+        parentData.addAll(data1027s);
+        parentData.addAll(data1028s);
+        parentData.addAll(data1039s);
 
-
-        for (ParentData data1025:predictions){
-
+        for (ParentData data1025:parentData){
 
             DataPrediction instance = data1025.getINSTANCE();
             if (instance==null){
 
-                Customer cus = data1025.getCus();
-
+                Customer oldCus = data1025.getOldCus();
+                Customer cus = data1025.getCus(oldCus);
                 customers.add(cus);
 
             }else {
+                predictions.add(instance);
 
-                System.out.println(instance);
 
             }
-
-
-
-
-
 
         }
         System.out.println("集合==="+customers.size());
+        List<Object> privateCus =new ArrayList<>();
+
+        List<Object> disCus =new ArrayList<>();
+
+        PrivateCity privateCity=new PrivateCity();
+
+
         try {
+            Date date1 = new Date();
+            String mMss = DataExu.getMMss(date1).replaceAll(":","-").replaceAll("/","-");
             if(customers.size()>0){
+                for (Customer customer:customers){
+                    if (customer.getAbbreviation()=="个人客户"){
+                        privateCity.setCode(customer.getC_Code());
+                        privateCity.setAddress(customer.getAddress());
+                        privateCity.setCity(customer.getCity());
+                        privateCus.add(privateCity);
+                    }else {
 
-                String s = POI.writeExcel("", customers, new Customer());
+                        disCus.add(customer);
 
-            }
-            for (Object customer:customers){
+                    }
 
-                System.out.println("不通过=="+customer.toString());
+                }
 
-            }
-        }catch (Exception e){
+                String excelIdP ;
+                String excelIdC;
+                excelIdC = mMss+"经销商";
+                excelIdP = mMss+"个人客户";
+                //发送个人客户维护和经销商维护信息
+                if (disCus.size()>0&&privateCus.size()>0){
+
+                    POI.writeExcel(excelIdC,disCus,new Customer());
+                    POI.writeExcel(excelIdP,privateCus,new PrivateCity());
+
+                }else if (disCus.size()>0){
+
+                    POI.writeExcel(excelIdC,disCus,new Customer());
+                }else if (privateCus.size()>0){
+                    POI.writeExcel(excelIdP,privateCus,new PrivateCity());
+                }else {
 
 
-        }
+                }
 
 
 
-        /*System.out.println("集合数量="+customers.size());
-        String path="";
-        for (Customer customer:customers){
-            System.out.println("不同过");
-            System.out.println(customer.toString());
-        }
-        try {
-            path = POI.writeExcel("",customers);
-            if (path==null){
 
-                System.out.println("创建失败=无附件！");
-                return;
+            }else {
+                //发送预报
+                String obShip = "OB出货预报"+mMss;
+                POI.writeExcel(obShip,predictions,new DataPrediction());
+                System.out.println("发送预报");
+
+
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            System.out.println("附件创建失败");
-
-        }*/
-
-
-
-
-
-        ///1027
-        //ist<Data1027> data1027s =  mapper1027.getList1027(map);
-        ///1025
-        //ist<Data1028> data1028s =  mapper1028.getList1028(map);
-        ///1025
-        //ist<Data1039> data1039s =  mapper1039.getList1039(map);
-
-
+            System.out.println("发送异常！");
+        }
 
 
     }
 
-    public  void  foreach(ParentData data1025) throws ParseException, MyException {
+   /* public  void  foreach(ParentData data1025) throws ParseException, MyException {
 
 
         DataPrediction instance = data1025.getINSTANCE();
@@ -149,7 +152,7 @@ public class PredictionDataImpl  {
 
     }
 
-
+*/
 
 
 }

@@ -15,8 +15,8 @@ public class DataPrediction {
     private String DestinationCity;//目的城市
     private String shipToP;//客户代码
     private String addressP;//卸货地址
-    private double ctnsP;//箱数
-    private double unitP;//件数
+    private String ctnsP;//箱数
+    private String unitP;//件数
     private String transportType;//陆运/铁运/空运
     private String lead;//在途时间
     private String eta;//预计到达时间
@@ -100,19 +100,19 @@ public class DataPrediction {
         this.addressP = addressP;
     }
 
-    public double getCtnsP() {
+    public String getCtnsP() {
         return ctnsP;
     }
 
-    public void setCtnsP(double ctnsP) {
+    public void setCtnsP(String ctnsP) {
         this.ctnsP = ctnsP;
     }
 
-    public double getUnitP() {
+    public String getUnitP() {
         return unitP;
     }
 
-    public void setUnitP(double unitP) {
+    public void setUnitP(String unitP) {
         this.unitP = unitP;
     }
 
@@ -216,27 +216,27 @@ public class DataPrediction {
     public String toString() {
         return "DataPrediction{" +
                 "createDate='" + createDate + '\'' +
-                ", buP='" + buP + '\'' +
-                ", packListP='" + packListP + '\'' +
-                ", shipDateP='" + shipDateP + '\'' +
-                ", shipHub='" + shipHub + '\'' +
-                ", DestinationCity='" + DestinationCity + '\'' +
-                ", shipToP='" + shipToP + '\'' +
-                ", addressP='" + addressP + '\'' +
-                ", ctnsP=" + ctnsP +
-                ", unitP=" + unitP +
-                ", transportType='" + transportType + '\'' +
-                ", lead='" + lead + '\'' +
-                ", eta='" + eta + '\'' +
-                ", status='" + status + '\'' +
-                ", carrierP='" + carrierP + '\'' +
-                ", noteRemark='" + noteRemark + '\'' +
-                ", AbnormalIssue='" + AbnormalIssue + '\'' +
-                ", shortN='" + shortN + '\'' +
-                ", cusName='" + cusName + '\'' +
-                ", consignee='" + consignee + '\'' +
-                ", telephoneP='" + telephoneP + '\'' +
-                ", phoneP='" + phoneP + '\'' +
+                ",wzr buP='" + buP + '\'' +
+                ",wzr packListP='" + packListP + '\'' +
+                ",wzr shipDateP='" + shipDateP + '\'' +
+                ",wzr shipHub='" + shipHub + '\'' +
+                ",wzr DestinationCity='" + DestinationCity + '\'' +
+                ",wzr shipToP='" + shipToP + '\'' +
+                ",wzr addressP='" + addressP + '\'' +
+                ",wzr ctnsP='" + ctnsP + '\'' +
+                ",wzr unitP='" + unitP + '\'' +
+                ",wzr transportType='" + transportType + '\'' +
+                ",wzr lead='" + lead + '\'' +
+                ",wzr eta='" + eta + '\'' +
+                ",wzr status='" + status + '\'' +
+                ",wzr carrierP='" + carrierP + '\'' +
+                ",wzr noteRemark='" + noteRemark + '\'' +
+                ",wzr AbnormalIssue='" + AbnormalIssue + '\'' +
+                ",wzr shortN='" + shortN + '\'' +
+                ",wzr cusName='" + cusName + '\'' +
+                ",wzr consignee='" + consignee + '\'' +
+                ",wzr telephoneP='" + telephoneP + '\'' +
+                ",wzr phoneP='" + phoneP + '\'' +
                 '}';
     }
 }

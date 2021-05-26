@@ -45,5 +45,12 @@ public class Remark implements Serializable {
         this.remark = remark;
     }
 
-
+    @Override
+    public String toString() {
+        return "Remark{" +
+                "id='" + id + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime='" + createTime + '\'' +
+                '}';
+    }
 }

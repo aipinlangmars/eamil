@@ -99,14 +99,14 @@ public class Customer implements Serializable {
     public String toString() {
         return "Customer{" +
                 "c_Code='" + c_Code + '\'' +
-                ", c_Name='" + c_Name + '\'' +
-                ", abbreviation='" + abbreviation + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", province='" + province + '\'' +
-                ", contact='" + contact + '\'' +
-                ", telephone='" + telephone + '\'' +
-                ", phone='" + phone + '\'' +
+                ",wzr c_Name='" + c_Name + '\'' +
+                ",wzr abbreviation='" + abbreviation + '\'' +
+                ",wzr address='" + address + '\'' +
+                ",wzr city='" + city + '\'' +
+                ",wzr province='" + province + '\'' +
+                ",wzr contact='" + contact + '\'' +
+                ",wzr telephone='" + telephone + '\'' +
+                ",wzr phone='" + phone + '\'' +
                 '}';
     }
 }
