@@ -197,7 +197,7 @@ public class Data1039 extends ParentData  implements Serializable {
     @Override
     public void setAbnormalIssue() {
         //todo
-        super.dataPrediction.setAbnormalIssue("");
+        //super.dataPrediction.setAbnormalIssue("");
     }
 
 

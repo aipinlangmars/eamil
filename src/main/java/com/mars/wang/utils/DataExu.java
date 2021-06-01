@@ -334,13 +334,12 @@ public class DataExu {
 
         if (leadTime > 20) {
 
-
-
-            date = air.format(new Date(parse.getTime() + leadTime  * 60 * 60 * 1000));
-
+            date = air.format(new Date(parse.getTime() + (leadTime+24)  * 60 * 60 * 1000));
+        //沈阳CSC特殊时效
         } else {
 
             date = format.format(new Date(parse.getTime() + leadTime * 24 * 60 * 60 * 1000));
+
         }
 
         return date;
@@ -374,35 +373,51 @@ public class DataExu {
 
 
     }
-    public static String getCrdRemark(String psst, String crdDate, String eta) throws ParseException {
+    public static String crdFormat(String date) throws ParseException {
+        String crd = date.replaceAll(" ", "");
         String crd1028;
-        String remark;
-        String crd = crdDate.trim();
-        boolean flag = isPsst(psst);
-        String sameDate = getSameDate(eta);
-        //1028
         if (crd.indexOf("202") != -1 && crd.indexOf("/") != -1) {
 
             crd1028 = crd.substring(crd.indexOf("202"), crd.length());
             crd1028 = getSameDate(crd1028);
             //返回备注
-            return getCRDString(equalsDate(crd1028,sameDate),"");
+            return crd1028;
 
         }
-        if (crdDate.length()==8&&flag){
+        if (crd.length()==8){
+            crd1028 = getSameDate(crd);
+            return crd1028;
+        }
+
+
+
+        return "";
+
+
+    }
+    public static String getCrdRemark(String psst, String crdDate, String eta) throws ParseException {
+        String crd1028;
+        String remark;
+
+        boolean flag = isPsst(psst);
+        String sameDate = getSameDate(eta);
+        String crd = crdFormat(crdDate);
+
+        if (crd.length()>0&&flag){
             String s = equalsDate(crd, sameDate);
 
            return getCRDString(s,"PSST");
 
 
         }
-        if (crdDate.length()==8 && !flag){
+        if (crd.length()>0){
             String s = equalsDate(crd, sameDate);
 
             return getCRDString(s,"");
 
 
         }
+
         if (flag){
 
             return getCRDString("","PSST");
@@ -568,7 +583,7 @@ public class DataExu {
         int scale = 5;
         double v = data1.divide(data2,10,BigDecimal.ROUND_HALF_UP).doubleValue();
 
-        System.out.println(v);
+        //System.out.println(v);
 
         String sameDate = getSameDate("21/07/12");
         String substring = "21/07/12".substring(1, 1);

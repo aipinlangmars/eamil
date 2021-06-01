@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.TReportDao">
+    <insert id="insert1025" parameterType="java.util.List">
+        INSERT INTO  data1025
+        (
+        bu,
+        hubCode,
+        typeCode,
+        packList,
+        log_trailer,
+        carrier,
+        saphub,
+        provice,
+        shipDate,
+        ctns,
+        unit,
+        window,
+        shipTo,
+        crdDate,
+        phDate,
+        psst,
+        stName,
+        phone,
+        address1,
+        address2,
+        address3,
+        address4
+        )VALUES
+        <foreach collection="list" index="index" item="data1025" separator=","  >
+            (
+            #{data1025.bu},
+            #{data1025.hubCode},
+            #{data1025.typeCode},
+            #{data1025.packList},
+            #{data1025.log_trailer},
+            #{data1025.carrier},
+            #{data1025.saphub},
+            #{data1025.provice},
+            #{data1025.shipDate},
+            #{data1025.ctns},
+            #{data1025.unit},
+            #{data1025.window},
+            #{data1025.shipTo},
+            #{data1025.crdDate},
+            #{data1025.phDate},
+            #{data1025.psst},
+            #{data1025.stName},
+            #{data1025.phone},
+            #{data1025.address1},
+            #{data1025.address2},
+            #{data1025.address3},
+            #{data1025.address4}
+            )
+        </foreach>
+    </insert>
+        <update id="update1025"  parameterType="com.mars.wang.domain.Data1025">
+            update data1025 SET
+                bu = #{bu},
+                hubCode = #{hubCode},
+                typeCode = #{typeCode},
+
+                log_trailer = #{log_trailer},
+                carrier = #{carrier},
+                saphub = #{saphub},
+                provice = #{provice},
+                shipDate = #{shipDate},
+                ctns = #{ctns},
+                unit = #{unit},
+                window = #{window},
+                shipTo = #{shipTo},
+                crdDate = #{crdDate},
+                phDate = #{phDate},
+                psst = #{psst},
+                stName = #{stName},
+                phone = #{phone},
+                address1 = #{address1},
+                address2 = #{address2},
+                address3 = #{address3},
+                address4 = #{address4}
+            where packList = #{packList}
+    </update>
+
+    <select id="select" resultType="int">
+        select count(*) from data1039
+    </select>
+
+    <select id="getList1025"  resultType="com.mars.wang.domain.Data1025" parameterType="String" >
+
+        select * from data1025 where shipDate = #{value}
+
+    </select>
+
+</mapper>

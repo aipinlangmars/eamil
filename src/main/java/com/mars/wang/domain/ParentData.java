@@ -65,7 +65,7 @@ public abstract class ParentData {
   String[] akas = customer.getAddress().split("aka");
   String  address1=null;
   for (int i=0;i<akas.length;i++){
-   if (akas[i].length()>5){
+   if (akas[i].length()>8){
     address1 = akas[i];
    }
   }
@@ -88,28 +88,55 @@ public abstract class ParentData {
   boolean air = DataExu.isAir(ob.getCarrierCode());
   String lead;
   String eta;
+  String leadTime;
 
   if (air){
+   leadTime = city.getAirTime();
    lead = city.getAirTime()+"h";
    dataPrediction.setStatus("已提货");
    dataPrediction.setCarrierP(city.getAirCarrier());
    dataPrediction.setTransportType("空运");
+   dataPrediction.setAbnormalIssue(city.getAirCarrier());
 
 
 
   }else {
+   leadTime = city.getLeadTime();
    lead = city.getLeadTime();
+   String desCity = city.getCity();
    dataPrediction.setStatus("干线运输");
    dataPrediction.setCarrierP(city.getCarrier());
    dataPrediction.setTransportType("公路");
+   if ("北京".equals(desCity)||"沈阳".equals(desCity)||"大连".equals(desCity)||"太原".equals(desCity)){
+    dataPrediction.setAbnormalIssue(desCity);
+   }else {
+    dataPrediction.setAbnormalIssue(city.getCarrier());
+   }
+
   }
+
   dataPrediction.setLead(lead);
+
+  String s = DataExu.crdFormat(ob.getCrd());
+
   //预计到货时间
-  eta = DataExu.getFormatEta(ob.getShipDate(),lead);
-  dataPrediction.setEta(eta);
+  eta = DataExu.getFormatEta(ob.getShipDate(),leadTime);
+
+  String s1 = DataExu.equalsDate(s, eta);
+
+  if (s1.length()==0){
+
+   dataPrediction.setEta(eta);
+
+  }else {
+   dataPrediction.setEta(s1);
+  }
+
+
   //托运单备注
   String crdRemark = DataExu.getCrdRemark(ob.getPsst(), ob.getCrd(), eta);
   dataPrediction.setNoteRemark(crdRemark);
+
 
 
  }

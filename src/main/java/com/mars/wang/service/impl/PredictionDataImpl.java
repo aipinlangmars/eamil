@@ -29,7 +29,7 @@ public class PredictionDataImpl  {
 
     public static void predictionData(Map map) throws ParseException, MyException {
         List<Customer> customers = new ArrayList<>();
-        String date ="2021/05/26";
+        String date ="2021/06/01";
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         EmailDao1025 mapper1025 = sqlSession.getMapper(EmailDao1025.class);
         EmailDao1027 mapper1027 = sqlSession.getMapper(EmailDao1027.class);
@@ -104,9 +104,11 @@ public class PredictionDataImpl  {
                     POI.writeExcel(excelIdP,privateCus,new PrivateCity());
 
                 }else if (disCus.size()>0){
+                    System.out.println("经销商代码未维护");
 
                     POI.writeExcel(excelIdC,disCus,new Customer());
                 }else if (privateCus.size()>0){
+                    System.out.println("个人客户未维护");
                     POI.writeExcel(excelIdP,privateCus,new PrivateCity());
                 }else {
 

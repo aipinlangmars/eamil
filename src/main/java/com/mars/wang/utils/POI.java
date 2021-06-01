@@ -3,6 +3,7 @@ package com.mars.wang.utils;
 import com.mars.wang.Demo2;
 import com.mars.wang.domain.Customer;
 
+import com.mars.wang.domain.wci.TReport;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
@@ -91,18 +92,19 @@ public class POI {
         return list;
 
     }
-    public static String[] getExcelHeads(Object object){
+    public static List<String> getExcelHeads(Object object,boolean flag){
 
         String string = object.toString();
         String title;
         String[] split = string.split("=");
-        String[] strings = new String[split.length-1];//末尾的null不要
+        List<String> strings = new ArrayList<>();//末尾的null不要
         String fileName = string.split("\\{")[0];
         InputStream in=null;
         String head=null;
         Properties prop=null;
 
         try {
+            //是否需要转换字段为中文
             in = POI.class.getClassLoader().getResourceAsStream(fileName+".properties");
             prop = new Properties();
             prop.load(in);
@@ -111,9 +113,9 @@ public class POI {
         }catch (Exception e){
             System.out.println("未找到字段配置文件，读取数据库字段！");
         }
-        if (in==null){
+        if (in==null||!flag){
 
-            for (int i =0;i<strings.length;i++){
+            for (int i =0;i<split.length-1;i++){
                 title = split[i];
 
 
@@ -123,11 +125,11 @@ public class POI {
                 }else if (title.indexOf("{")!=-1){
                     head=title.split("\\{")[1];
                 }
-                strings[i] = head;
+                strings.add(head);
 
             }
         }else {
-            for (int i =0;i<strings.length;i++){
+            for (int i =0;i<split.length-1;i++){
                 title = split[i];
 
 
@@ -139,7 +141,7 @@ public class POI {
                 }
                 try {
                     String resultName2=new String(prop.getProperty(head).getBytes("ISO-8859-1"),"gbk");
-                    strings[i] = resultName2;
+                    strings.add(resultName2);
                 }catch (Exception e){
                     e.printStackTrace();
                     System.out.println("中文转换异常！"+title);
@@ -166,7 +168,7 @@ public class POI {
         //定义表头
         String path = "D:\\powernode\\Excel\\bodyPart";
 
-        String[] title=getExcelHeads(target);
+        List<String> title=getExcelHeads(target,true);
 
 //创建excel工作簿
         XSSFWorkbook workbook=new XSSFWorkbook();
@@ -200,10 +202,10 @@ public class POI {
 //插入第一行数据的表头
         List<List<String>> classMap = getClassMap(list);
         List<String> strings = classMap.get(0);
-        for(int i=0;i<title.length;i++){
+        for(int i=0;i<title.size();i++){
             String value = strings.get(i);
             cell=row.createCell(i);
-            cell.setCellValue(title[i]);
+            cell.setCellValue(title.get(i));
             cell.setCellStyle(styleHead);
 
             //cell.setCellStyle(styleHead);
@@ -258,7 +260,7 @@ public class POI {
                 XSSFCell cell1 ;
                 String s = listRow.get(col);
                 cell1 = row1.createCell(col);
-                if ("箱数".equals(title[col])||"件数".equals(title[col])){
+                if ("箱数".equals(title.get(col))||"件数".equals(title.get(col))){
                     style.setDataFormat(workbook.createDataFormat().getFormat("0"));
                     int i = Integer.valueOf(s);
                     cell1.setCellValue(i);
@@ -637,7 +639,49 @@ public class POI {
             }
         }
     }*/
+    public static List readExcel(Object o,String path) throws Exception {
 
+        TReport tReport = new TReport();
+
+
+        InputStream  in = new FileInputStream("C:\\Users\\Administrator\\Downloads\\Tracking Report(20210526).xlsx");
+
+        Workbook wb = new XSSFWorkbook(in);
+
+        Sheet sheet1 = wb.getSheetAt(0);
+
+        List<String> excelHeads = POI.getExcelHeads(tReport,false);
+
+        int lastRowNum = sheet1.getLastRowNum();
+
+        Map<String,String> map;
+        List<String>  listMap;
+        List<TReport> tReports = new ArrayList<>();
+
+        //System.out.println("last="+lastRowNum);
+        for (int i =2;i<=lastRowNum;i++){
+            listMap= new ArrayList<>();
+            Row row = sheet1.getRow(i);
+
+            System.out.println("第"+i+"行=====  ");
+
+            for (int col=0;col<excelHeads.size();col++){
+
+                Cell cell = row.getCell(col);
+
+                //System.out.print(cell.getStringCellValue()+"  ");
+                //map.put(excelHeads[i],cell.getStringCellValue());
+                //System.out.print(cell.getStringCellValue());
+                listMap.add(cell.getStringCellValue());
+            }
+            TReport tReport1 = tReport.setAll(listMap, excelHeads);
+            tReports.add(tReport1);
+
+
+        }
+
+        return tReports;
+    }
 
 
 
