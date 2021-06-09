@@ -7,6 +7,7 @@ import com.mars.wang.domain.*;
 import org.apache.ibatis.session.SqlSession;
 
 
+
 import java.math.BigDecimal;
 
 import java.text.ParseException;
@@ -108,6 +109,7 @@ public class DataExu {
 
             //todo 空运
             flag = true;
+            System.out.println("空运=="+runType);
         } else {
             flag = false;
             //陆运
@@ -133,81 +135,81 @@ public class DataExu {
 
         Customer privateCus = new Customer();
 
-        String prediction = telephone.trim().replace(" ","");
-
+        String phone = telephone.replace(" ","");
+        String name = stName.replaceAll(" ","");//姓名
+        System.out.println(name);
         String cusName;
-        String addressP;
-        String stTelephone;
-        String SName;
-        String privateName;
         String city2;
-        String name = stName.trim();//姓名
+        String p;
+        String tPhone="";//电话分裂
         int stNameLen = name.length();
         boolean y;
+        String contactName="";
 
-
-        //判断stname是否有电话号码
-        try{
-            //todo
-            cusName = name.substring(stNameLen-8,stNameLen);
-
-            Integer.parseInt(cusName);
-
+        try {
+            p = name.substring(stNameLen - 6 , stNameLen);
+            int i = Integer.parseInt(p);
             y=true;
-
-
+            //System.out.println("stname有电话号码");
         }catch (Exception e){
-            //todo 发送预报维护信息
-
-            y= false;
-
+            y=false;
+            //System.out.println("stname无电话号码");
         }
-
+        //判断stname是否有电话号码
         List<String> citys = privateCityDao.getCity("%"+address.replaceAll(" ","")+"%");
+
         if (citys.size()>0){
             city2 = citys.get(0);
 
-                privateCus.setCity(city2);
-                privateCus.setAbbreviation(city2+"个人客户");
-                privateCus.setC_Name("个人客户");
-                privateCus.setAddress(addr);
-                privateCus.setC_Code(code);
-                privateCus.setFlag(true);
-                //电话客户列分开
-                if (prediction.length()>=9&&!y){
+            privateCus.setCity(city2);
+            privateCus.setAbbreviation(city2+"个人客户");
+            privateCus.setC_Name("个人客户");
+            privateCus.setAddress(addr);
+            privateCus.setC_Code(code);
+            privateCus.setFlag(true);
+            //个人客户且名字有电话号码
+            if(y){
+                for (int i=0;i<6;i++) {
+                    System.out.println("循环"+i);
 
-                    //个人客户名称
-                    privateCus.setContact(name);
-                    privateCus.setPhone(telephone);
-                    privateCus.setTelephone(telephone);
+                    try {
+                        tPhone = name.substring(stNameLen - 11 + i, stNameLen);
+                       // System.out.println("phone=="+tPhone);
+                        Long.parseLong(tPhone);
+                        cusName  = name.substring(0, stNameLen-11+i);
+                        //System.out.println("cus="+cusName);
 
-                    //System.out.println("//电话客户列分开"+telephone);
-                    return privateCus;
+                        contactName = cusName;
+                        break;
+                    } catch (Exception e) {
+                        contactName = name;
+                        tPhone= phone;
+                    }
+                    //System.out.println("cusname="+contactName);
+                }
+                //个人客户名称
+                privateCus.setContact(contactName);
+                //如果电话列有号码就放电话列号码
+                if (tPhone.length()==11){
+                    privateCus.setPhone(tPhone);
+                    privateCus.setTelephone(tPhone);
 
-                //客户且有电话号码 todo
-                }else if(prediction.length()<9&&y){
-                    stTelephone = name.substring(stNameLen-11,stNameLen);
-                    //个人客户名称
-                    stName = name.substring(0,stNameLen-11);
-                    privateCus.setContact(stName);
-                    privateCus.setPhone(stTelephone);
-                    privateCus.setTelephone(stTelephone);
-                    //System.out.println("//客户且有电话号码 电话列也有信息"+stTelephone);
-                    return privateCus;
-                    //两列均有电话号码
-                }else if(prediction.length()>=9&&y){
-                    stName = name.substring(0,stNameLen-11);
-                    privateCus.setContact(stName);
-                    privateCus.setPhone(telephone);
-                    privateCus.setTelephone(telephone);
-                    //System.out.println("//两列均有电话号码"+telephone);
-                    return privateCus;
-
-                }else {
-
-                    throw new MyException("不匹配");
+                }else if(phone.length()>10) {
+                    privateCus.setPhone(phone);
+                    privateCus.setTelephone(phone);
                 }
 
+                //System.out.println("//电话客户列分开"+telephone);
+
+            }else{
+                privateCus.setContact(name);
+                privateCus.setPhone(phone);
+                privateCus.setTelephone(phone);
+
+            }
+            //todo
+
+            return privateCus;
         }else {
             if (y||stName.length()<=7){
 
@@ -227,9 +229,9 @@ public class DataExu {
             privateCus.setCity(province);
 
             return privateCus;
+            //todo
 
         }
-
 
 
 
@@ -282,6 +284,7 @@ public class DataExu {
             }
 
             privateCus = getPrivateCus(replaceCode,stName, address, telephone,addressNsp.trim(),province);
+
         //好孩子等经销商
         }else if (distributorName!=null){
             if (length==3){
@@ -334,7 +337,7 @@ public class DataExu {
 
         if (leadTime > 20) {
 
-            date = air.format(new Date(parse.getTime() + (leadTime+24)  * 60 * 60 * 1000));
+            date = air.format(new Date(parse.getTime() + (leadTime+24-1)  * 60 * 60 * 1000));
         //沈阳CSC特殊时效
         } else {
 

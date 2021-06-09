@@ -3,10 +3,8 @@ package com.mars.wang.domain;
 import com.mars.wang.MyException;
 import com.mars.wang.utils.DataExu;
 import com.mars.wang.utils.Fomat;
-import com.mars.wang.utils.getdata.Parent;
 import com.mars.wang.vo.OB;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
@@ -42,7 +40,7 @@ public class Data1025  extends ParentData implements Serializable{
     public void setCreateDate() {
         String date = Fomat.getString(new Date().getTime());
 
-        super.dataPrediction.setCreateDate(date);
+        super.prediction.setCreateDate(date);
 
     }
     //产品类型
@@ -50,13 +48,13 @@ public class Data1025  extends ParentData implements Serializable{
     public void setBuP() {
         String bu = DataExu.getBu(this.bu);
 
-        super.dataPrediction.setBuP(bu);
+        super.prediction.setBuP(bu);
     }
     //客户单号
     @Override
     public void setPackListP() {
         String code = "0"+this.packList;
-        super.dataPrediction.setPackListP(code);
+        super.prediction.setPackListP(code);
     }
     //发货时间
     @Override
@@ -64,19 +62,19 @@ public class Data1025  extends ParentData implements Serializable{
 
         String date = DataExu.getSameDate(this.shipDate);
 
-        super.dataPrediction.setShipDateP(date);
+        super.prediction.setShipDateP(date);
     }
 
     @Override
     public void setShipHub() {
-        super.dataPrediction.setShipHub("太仓CLC");
+        super.prediction.setShipHub("太仓CLC");
     }
 
     @Override
     public void setDestinationCity(Customer cus) {
 
 
-        super.dataPrediction.setDestinationCity(cus.getCity());
+        super.prediction.setDestinationCity(cus.getCity());
     }
 
 
@@ -85,14 +83,14 @@ public class Data1025  extends ParentData implements Serializable{
     public void setCtnsP() {
         //int num = Integer.parseInt();
 
-        super.dataPrediction.setCtnsP(this.ctns);
+        super.prediction.setCtnsP(this.ctns);
     }
     //件数
     @Override
     public void setUnitP() {
         //int num = Integer.parseInt();
 
-        super.dataPrediction.setUnitP(this.unit);
+        super.prediction.setUnitP(this.unit);
     }
 
 
@@ -118,6 +116,23 @@ public class Data1025  extends ParentData implements Serializable{
 
     @Override
     public Customer getOldCus() {
+        String p;
+        String phone1= this.address1.replaceAll(" ", "");
+        if (phone1.length()>=10){
+            String substring = phone1.substring(3, phone1.length());
+            try {
+                Integer.parseInt(substring);
+                p= phone1;
+            }catch (Exception e){
+                p = this.phone;
+                System.out.println("号码解析失败");
+            }
+
+        }else {
+
+            p = this.phone;
+        }
+
         String addresses;
         if (super.isFlag()){
             addresses = this.address2+" "+"aka"+" "+this.address3+"aka"+" "+this.address4;
@@ -131,13 +146,13 @@ public class Data1025  extends ParentData implements Serializable{
         customer.setContact(this.stName);
         customer.setCity(this.provice);
         customer.setAddress(addresses);
-        customer.setTelephone(this.phone);
-        customer.setPhone(this.phone);
+        customer.setTelephone(p);
+        customer.setPhone(p);
         return customer;
     }
 
     @Override
-    public DataPrediction getINSTANCE() throws MyException, ParseException {
+    public Prediction getINSTANCE() throws MyException, ParseException {
         Customer customer = getCus(getOldCus());
         if (!customer.getFlag()){
 

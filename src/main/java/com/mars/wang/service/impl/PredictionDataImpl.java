@@ -3,10 +3,7 @@ package com.mars.wang.service.impl;
 
 
 import com.mars.wang.MyException;
-import com.mars.wang.dao.EmailDao1025;
-import com.mars.wang.dao.EmailDao1027;
-import com.mars.wang.dao.EmailDao1028;
-import com.mars.wang.dao.EmailDao1039;
+import com.mars.wang.dao.*;
 import com.mars.wang.domain.*;
 
 import com.mars.wang.utils.DataExu;
@@ -27,14 +24,19 @@ public class PredictionDataImpl  {
     }
 
 
+
     public static void predictionData(Map map) throws ParseException, MyException {
+        //SqlSession sqlSession = SqlSessionUtil.getSqlSession();
+
+        List<Prediction> dataPredictions = new ArrayList<>();
         List<Customer> customers = new ArrayList<>();
-        String date ="2021/06/01";
+        String date ="2021/06/09";
         SqlSession sqlSession = SqlSessionUtil.getSqlSession();
         EmailDao1025 mapper1025 = sqlSession.getMapper(EmailDao1025.class);
         EmailDao1027 mapper1027 = sqlSession.getMapper(EmailDao1027.class);
         EmailDao1028 mapper1028 = sqlSession.getMapper(EmailDao1028.class);
         EmailDao1039 mapper1039 = sqlSession.getMapper(EmailDao1039.class);
+        DataPredictionDao dataPredictionDao = sqlSession.getMapper(DataPredictionDao.class);
 
         List<ParentData> data1025s =  mapper1025.getList1025(date);
         List<ParentData> data1027s = mapper1027.getList1027(date);
@@ -53,16 +55,26 @@ public class PredictionDataImpl  {
 
         for (ParentData data1025:parentData){
 
-            DataPrediction instance = data1025.getINSTANCE();
+            Prediction instance = data1025.getINSTANCE();
             if (instance==null){
 
                 Customer oldCus = data1025.getOldCus();
+                //System.out.println("oldcus=="+oldCus);
                 Customer cus = data1025.getCus(oldCus);
+                //System.out.println("newcus=="+cus);
                 customers.add(cus);
 
             }else {
+                //预报发送
                 predictions.add(instance);
+                /*try {
+                    //dataPredictionDao.insertOneValue(instance);
 
+                }catch (Exception e){
+                    e.printStackTrace();
+                    System.out.println("记录更新="+instance.getBuP());
+                    dataPredictionDao.updatePre(instance);
+                }*/
 
             }
 
@@ -72,7 +84,7 @@ public class PredictionDataImpl  {
 
         List<Object> disCus =new ArrayList<>();
 
-        PrivateCity privateCity=new PrivateCity();
+        PrivateCity privateCity;
 
 
         try {
@@ -80,11 +92,14 @@ public class PredictionDataImpl  {
             String mMss = DataExu.getMMss(date1).replaceAll(":","-").replaceAll("/","-");
             if(customers.size()>0){
                 for (Customer customer:customers){
+
                     if (customer.getAbbreviation()=="个人客户"){
+                        privateCity=new PrivateCity();
                         privateCity.setCode(customer.getC_Code());
                         privateCity.setAddress(customer.getAddress());
-                        privateCity.setCity(customer.getCity());
+                        privateCity.setCity(customer.getProvince());
                         privateCus.add(privateCity);
+                        System.out.println(customer);
                     }else {
 
                         disCus.add(customer);
@@ -109,6 +124,10 @@ public class PredictionDataImpl  {
                     POI.writeExcel(excelIdC,disCus,new Customer());
                 }else if (privateCus.size()>0){
                     System.out.println("个人客户未维护");
+                    for (Object ci:privateCus){
+
+                        System.out.println(ci);
+                    }
                     POI.writeExcel(excelIdP,privateCus,new PrivateCity());
                 }else {
 
@@ -121,8 +140,9 @@ public class PredictionDataImpl  {
             }else {
                 //发送预报
                 String obShip = "OB出货预报"+mMss;
-                POI.writeExcel(obShip,predictions,new DataPrediction());
-                System.out.println("发送预报");
+                POI.writeExcel(obShip,predictions,new Prediction());
+
+                System.out.println("数据插入成功==发送预报！");
 
 
             }

@@ -4,7 +4,7 @@ import com.mars.wang.utils.DataExu;
 
 import java.util.List;
 
-public class DataPrediction {
+public class Prediction {
 
 
     private String createDate;//生成日期
@@ -12,7 +12,7 @@ public class DataPrediction {
     private String packListP;//发货单号
     private String shipDateP;//发货时间
     private String shipHub;//出发城市
-    private String DestinationCity;//目的城市
+    private String destinationCity;//目的城市
     private String shipToP;//客户代码
     private String addressP;//卸货地址
     private String ctnsP;//箱数
@@ -77,11 +77,11 @@ public class DataPrediction {
     }
 
     public String getDestinationCity() {
-        return DestinationCity;
+        return destinationCity;
     }
 
     public void setDestinationCity(String destinationCity) {
-        DestinationCity = destinationCity;
+        this.destinationCity = destinationCity;
     }
 
     public String getShipToP() {
@@ -220,7 +220,7 @@ public class DataPrediction {
                 ",wzr packListP='" + packListP + '\'' +
                 ",wzr shipDateP='" + shipDateP + '\'' +
                 ",wzr shipHub='" + shipHub + '\'' +
-                ",wzr DestinationCity='" + DestinationCity + '\'' +
+                ",wzr DestinationCity='" + destinationCity + '\'' +
                 ",wzr shipToP='" + shipToP + '\'' +
                 ",wzr addressP='" + addressP + '\'' +
                 ",wzr ctnsP='" + ctnsP + '\'' +

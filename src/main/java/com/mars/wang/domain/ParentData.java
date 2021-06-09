@@ -2,17 +2,14 @@ package com.mars.wang.domain;
 
 import com.mars.wang.MyException;
 import com.mars.wang.utils.DataExu;
-import com.mars.wang.utils.getdata.Parent;
 import com.mars.wang.vo.OB;
 
-import javax.xml.crypto.Data;
 import java.text.ParseException;
-import java.util.List;
 
 public abstract class ParentData {
 
 
- DataPrediction dataPrediction = new DataPrediction();
+ Prediction prediction = new Prediction();
  private boolean flag = true;
 
  public boolean isFlag() {
@@ -27,7 +24,7 @@ public abstract class ParentData {
  public abstract Customer getOldCus();
 
 
- public DataPrediction getINSTANCE() throws MyException, ParseException {
+ public Prediction getINSTANCE() throws MyException, ParseException {
   Customer customer = getCus(getOldCus());
   OB ob = getOB();
   City leadCity = getCityLead(customer.getCity());
@@ -53,7 +50,7 @@ public abstract class ParentData {
 
 
 
-  return this.dataPrediction;
+  return this.prediction;
  }
  public City getCityLead(String city) throws MyException {
   City city1 = DataExu.getCity(city);
@@ -61,16 +58,16 @@ public abstract class ParentData {
   return city1;
 
  };
- public  Customer  getCus(Customer customer) throws MyException{
-  String[] akas = customer.getAddress().split("aka");
+ public  Customer  getCus(Customer ob) throws MyException{
+  String[] akas = ob.getAddress().split("aka");
   String  address1=null;
   for (int i=0;i<akas.length;i++){
-   if (akas[i].length()>8){
+   if (akas[i].length()>10){
     address1 = akas[i];
    }
   }
 
-  Customer cus = DataExu.getCus(customer.getC_Code(), customer.getC_Name(), address1, customer.getTelephone(), akas, customer.getProvince());
+  Customer cus = DataExu.getCus(ob.getC_Code(), ob.getC_Name(), address1, ob.getTelephone(), akas, ob.getProvince());
 
   return cus;
  };
@@ -93,10 +90,10 @@ public abstract class ParentData {
   if (air){
    leadTime = city.getAirTime();
    lead = city.getAirTime()+"h";
-   dataPrediction.setStatus("已提货");
-   dataPrediction.setCarrierP(city.getAirCarrier());
-   dataPrediction.setTransportType("空运");
-   dataPrediction.setAbnormalIssue(city.getAirCarrier());
+   prediction.setStatus("已提货");
+   prediction.setCarrierP(city.getAirCarrier());
+   prediction.setTransportType("空运");
+   prediction.setAbnormalIssue(city.getAirCarrier());
 
 
 
@@ -104,18 +101,18 @@ public abstract class ParentData {
    leadTime = city.getLeadTime();
    lead = city.getLeadTime();
    String desCity = city.getCity();
-   dataPrediction.setStatus("干线运输");
-   dataPrediction.setCarrierP(city.getCarrier());
-   dataPrediction.setTransportType("公路");
+   prediction.setStatus("干线运输");
+   prediction.setCarrierP(city.getCarrier());
+   prediction.setTransportType("公路");
    if ("北京".equals(desCity)||"沈阳".equals(desCity)||"大连".equals(desCity)||"太原".equals(desCity)){
-    dataPrediction.setAbnormalIssue(desCity);
+    prediction.setAbnormalIssue(desCity);
    }else {
-    dataPrediction.setAbnormalIssue(city.getCarrier());
+    prediction.setAbnormalIssue(city.getCarrier());
    }
 
   }
 
-  dataPrediction.setLead(lead);
+  prediction.setLead(lead);
 
   String s = DataExu.crdFormat(ob.getCrd());
 
@@ -123,19 +120,19 @@ public abstract class ParentData {
   eta = DataExu.getFormatEta(ob.getShipDate(),leadTime);
 
   String s1 = DataExu.equalsDate(s, eta);
-
+//CRD是否满足大于ETA
   if (s1.length()==0){
 
-   dataPrediction.setEta(eta);
+   prediction.setEta(eta);
 
   }else {
-   dataPrediction.setEta(s1);
+   prediction.setEta(s1);
   }
 
 
   //托运单备注
   String crdRemark = DataExu.getCrdRemark(ob.getPsst(), ob.getCrd(), eta);
-  dataPrediction.setNoteRemark(crdRemark);
+  prediction.setNoteRemark(crdRemark);
 
 
 
@@ -144,35 +141,35 @@ public abstract class ParentData {
  //customer
  //目的城市
  public void setDestinationCity(Customer cus){
-  dataPrediction.setDestinationCity(cus.getCity());
+  prediction.setDestinationCity(cus.getCity());
 
  }
  //客户代码
  public void setShipToP(Customer cus) throws MyException {
-  dataPrediction.setShipToP(cus.getC_Code());
+  prediction.setShipToP(cus.getC_Code());
  }
  //收货地址
  public void setAddressP(Customer cus) throws MyException{
-  dataPrediction.setAddressP(cus.getAddress());
+  prediction.setAddressP(cus.getAddress());
  };
  public void setShortN(Customer cus) throws MyException{
-  dataPrediction.setShortN(cus.getAbbreviation());
+  prediction.setShortN(cus.getAbbreviation());
 
  };
  public void setCusName(Customer cus) throws MyException{
 
-  dataPrediction.setCusName(cus.getC_Name());
+  prediction.setCusName(cus.getC_Name());
  }
  public void setConsignee(Customer cus) throws MyException{
-  dataPrediction.setConsignee(cus.getContact());
+  prediction.setConsignee(cus.getContact());
  };
  public void setTelephoneP(Customer cus) throws MyException{
-  dataPrediction.setTelephoneP(cus.getTelephone());
+  prediction.setTelephoneP(cus.getTelephone());
 
  };
  public void setPhoneP(Customer cus) throws MyException{
 
-  dataPrediction.setPhoneP(cus.getPhone());
+  prediction.setPhoneP(cus.getPhone());
  };
 
 }

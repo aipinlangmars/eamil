@@ -130,6 +130,8 @@ public class POP3ReceiveMailTest {
     }
 
 
+
+
     public static DataVo parseMessage1(String emailType,Message messages) throws MessagingException, IOException {
 
 
@@ -147,7 +149,7 @@ public class POP3ReceiveMailTest {
                 dataType="1028";
             }else if(subject.indexOf("pre-advice")!=-1){
                 dataType="1025";
-            }else if(subject.indexOf("RUBO-预报")!=-1||subject.indexOf("RUBO-下午")!=-1||subject.indexOf("RUBO-中午")!=-1||subject.indexOf("RUBO-Early SMD")!=-1){
+            }else if(subject.indexOf("RUBO-预报")!=-1||subject.indexOf("RUBO-下午")!=-1||subject.indexOf("RUBO-中午")!=-1||subject.indexOf("RUBO-Early SMD")!=-1||subject.indexOf("RUBO下午")!=-1||subject.indexOf("RUBO中午")!=-1){
                 dataType="1027";
             }
             //boolean flag = subject.indexOf("1039-OB-")!=-1||subject.indexOf("RUBO-预报")!=-1||subject.indexOf("pre-advice")!=-1||subject.indexOf("RUBO Shipment Plan")!=-1;
@@ -210,7 +212,65 @@ public class POP3ReceiveMailTest {
      * @param messages 要解析的邮件列表
      */
 
+    public static DataVo getMessage(String emailType,Message messages) throws MessagingException, IOException {
 
+
+        // 解析所有邮件
+
+        MimeMessage msg = (MimeMessage) messages;
+        String subject = getSubject(msg);
+        System.out.println(subject);
+        String dataType="";
+        DataVo vo =new DataVo();
+        if (subject.indexOf(emailType)!=-1){
+            dataType="TReport";
+        }else {
+            return vo;
+        }
+
+        //boolean flag = subject.indexOf("1039-OB-")!=-1||subject.indexOf("RUBO-预报")!=-1||subject.indexOf("pre-advice")!=-1||subject.indexOf("RUBO Shipment Plan")!=-1;
+        System.out.println("------------------解析第" + msg.getMessageNumber() + "封邮件-------------------- ");
+        System.out.println("主题: " + getSubject(msg));
+        System.out.println("发件人: " + subject);
+        System.out.println("收件人：" + getReceiveAddress(msg, null));
+        System.out.println("发送时间：" + getSentDate(msg, null));
+        System.out.println("是否已读：" + isSeen(msg));
+        System.out.println("邮件优先级：" + getPriority(msg));
+        System.out.println("是否需要回执：" + isReplySign(msg));
+        System.out.println("邮件大小：" + msg.getSize() * 1024 + "kb");
+        boolean isContainerAttachment = isContainAttachment(msg);
+        System.out.println("是否包含附件：" + isContainerAttachment);
+
+        StringBuffer content = new StringBuffer(30);
+        getMailTextContent(msg, content);
+
+
+
+        System.out.println("邮件正文：" + (content.length() > 100 ? content.substring(0,100)+"..." : content));
+
+        System.out.println("------------------第" + msg.getMessageNumber() + "封邮件解析结束-------------------- ");
+        System.out.println(dataType);
+
+
+        if (isContainerAttachment ) {
+
+
+            System.out.println("进入文体解析！");
+
+            //save(msg, "E:\\dongli\\"+msg.getSubject() + "_"+"_"); //保存附件
+
+            vo.setDataType(dataType);
+            vo.setMessage(msg);
+            vo.setSendDate(getSentDate(msg, null));
+            return vo;
+
+        }
+
+        vo.setMessage(null);
+        vo.setDataType(getSubject(msg));
+        return vo;
+
+    }
 
 
 
@@ -432,6 +492,69 @@ public class POP3ReceiveMailTest {
         }
     }
     private static String remark;
+    public static InputStream getExcelInputStream(Message message) throws UnsupportedEncodingException, MessagingException,
+            FileNotFoundException, IOException {
+        MimeMessage mimeMessage = (MimeMessage) message;
+        Multipart multipart = (Multipart) mimeMessage.getContent();
+        int count = multipart.getCount();
+        System.out.println("count1="+count);
+        InputStream is =null;
+        POIVo vo = null;
+        remark = getSubject(mimeMessage)+getSentDate(mimeMessage,null);
+        String fileName="";
+        for (int i=0;i<count;i++){
+
+            BodyPart bodyPart = multipart.getBodyPart(i);
+
+            String type = bodyPart.getContentType();
+
+            int i1 = type.indexOf('"');
+
+            if (i1!=-1){
+                String substring = type.substring(type.indexOf('"') + 1, type.lastIndexOf('"'));
+
+                fileName = MimeUtility.decodeText(substring);
+
+                System.out.println("文件名="+substring);
+
+                System.out.println("解析后2="+fileName);
+
+            }
+            int flag=-1;
+            if (fileName.indexOf(".xlsx")!=-1){
+                flag=1;
+            }
+
+            if ((type.indexOf("name")!=-1||type.indexOf("application")!=-1)&&flag!=-1){
+
+                String disposition = bodyPart.getDisposition();
+
+                Object content = bodyPart.getContent();
+                System.out.println("disposition="+disposition);
+                System.out.println("type="+type);
+                //System.out.println("description="+description);
+                System.out.println("content="+content);
+                is = bodyPart.getInputStream();
+                System.out.println("查到附件");
+                return is;
+
+                //List<Data1039> list = readExcel("", is, destDir, decodeText(bodyPart.getFileName()));
+
+            }else {
+
+                continue;
+
+            }
+
+
+
+        }
+        return null;
+
+
+
+
+    }
     public static POIVo save(DataVo dataVo, String destDir) throws UnsupportedEncodingException, MessagingException,
             FileNotFoundException, IOException {
         Multipart multipart = (Multipart) dataVo.getMessage().getContent();
@@ -757,6 +880,7 @@ public class POP3ReceiveMailTest {
 
 
 
+
         /*BufferedInputStream bis = new BufferedInputStream(is);
         BufferedOutputStream bos = new BufferedOutputStream(
                 new FileOutputStream(new File(destDir + fileName)));
@@ -772,6 +896,9 @@ public class POP3ReceiveMailTest {
 
         return map;
     }
+
+
+
 
 
 

@@ -80,7 +80,7 @@ public class Data1027  extends ParentData implements Serializable {
 
     }
     @Override
-    public DataPrediction getINSTANCE() throws MyException, ParseException {
+    public Prediction getINSTANCE() throws MyException, ParseException {
         Customer customer = getCus(getOldCus());
         if (!customer.getFlag()){
 
@@ -162,7 +162,7 @@ public class Data1027  extends ParentData implements Serializable {
     public void setCreateDate() {
         String date = Fomat.getString(new Date().getTime());
 
-        super.dataPrediction.setCreateDate(date);
+        super.prediction.setCreateDate(date);
 
     }
     //产品类型
@@ -170,23 +170,23 @@ public class Data1027  extends ParentData implements Serializable {
     public void setBuP() {
         String bu = DataExu.getBu(this.waveparmdesc);
 
-        super.dataPrediction.setBuP(bu);
+        super.prediction.setBuP(bu);
     }
     //客户单号
     @Override
     public void setPackListP() {
 
-        super.dataPrediction.setPackListP(this.distriborderid);
+        super.prediction.setPackListP(this.distriborderid);
     }
 
     @Override
     public void setShipDateP() throws ParseException {
-        super.dataPrediction.setShipDateP(this.requesteddttm);
+        super.prediction.setShipDateP(this.requesteddttm);
     }
 
     @Override
     public void setShipHub() {
-        super.dataPrediction.setShipHub("太仓3RD");
+        super.prediction.setShipHub("太仓3RD");
     }
 
 
@@ -197,14 +197,14 @@ public class Data1027  extends ParentData implements Serializable {
     public void setCtnsP() {
         //int num = Integer.parseInt(this.totallpns);
 
-        super.dataPrediction.setCtnsP(this.totallpns);
+        super.prediction.setCtnsP(this.totallpns);
     }
     //件数
     @Override
     public void setUnitP() {
         //int num = Integer.parseInt(this.totalunits);
 
-        super.dataPrediction.setUnitP(this.totalunits);
+        super.prediction.setUnitP(this.totalunits);
     }
 
 

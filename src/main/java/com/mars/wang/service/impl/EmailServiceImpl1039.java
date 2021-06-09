@@ -36,7 +36,7 @@ public class EmailServiceImpl1039  {
             System.out.println("收件箱="+emails);
             int count=0;
             POIVo vo;
-            for (int i = emails-1;i>emails-200; i-- ){
+            for (int i = emails-1;i>emails-50; i-- ){
 
                 //System.out.println(message.getSubject());
 
@@ -144,8 +144,6 @@ public class EmailServiceImpl1039  {
                     data1025.setShipDate(DataExu.getSameDate(data1025.getShipDate()));
                     try{
                         list1 = new ArrayList<>();
-
-
 
                         list1.add(data1025);
 

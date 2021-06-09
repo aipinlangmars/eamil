@@ -2,16 +2,17 @@ package com.mars.wang.domain.wci;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TReport extends Report{
+public class Report {
 
-    private String sonumber;//SO单号
+    /*private String sonumber;//SO单号
     private String cpod;//总单号
     private String packListP;//发货号
     private String loadingdate;//发货日期
     private String shipHub;//出发城市
-    private String  destinationCity;//目的城市
+    private String destinationCity;//目的城市
     private String province;//目的省份
     private String shipToP;//收货人代码
     private String consigneename;//收货人
@@ -32,9 +33,9 @@ public class TReport extends Report{
     private String warehouse;//仓库
     private String sysCRD;//系统CRD日期
     private String updateEta;//UpdateETA
-    private String problemOwner;//责任代码
+    private String problemOwner;//责任代码*/
 
-    public String getSonumber() {
+    /*public String getSonumber() {
         return sonumber;
     }
 
@@ -79,7 +80,7 @@ public class TReport extends Report{
     }
 
     public void setDestinationCity(String destinationCity) {
-        this.destinationCity = destinationCity;
+        destinationCity = destinationCity;
     }
 
     public String getProvince() {
@@ -247,99 +248,80 @@ public class TReport extends Report{
     }
     public void setProblemOwner(String problemOwner) {
         this.problemOwner = problemOwner;
+    }*/
+    //private List<String> values = new ArrayList<>();
+    //private List<String> methods = new ArrayList<>();
+    private Class clazz;
+    private Report report;
+
+    /*public List<String> getValues() {
+        return values;
     }
 
-
-    @Override
-    public Object setAll(List<String> values,List<String> methods) throws Exception {
-
-
-        Class<TReport> clazz = (Class<TReport>) Class.forName("com.mars.wang.domain.wci.TReport");
-
-        Constructor con =  clazz.getConstructor();
-
-        TReport m = (TReport) con.newInstance();
-
-        super.setClazz(clazz);
-
-        super.setReport(m);
-
-        return super.setAll(values,methods);
-
-
-
+    public List<String> getMethods() {
+        return methods;
     }
 
-   /* @Override
-    public Object setAl(List<String> values,List<String> methodNames,TReport) throws Exception{
-        System.out.println(values.size()+"=="+methodNames.size());
+    public void setValues(List<String> values) {
+        this.values = values;
+    }
 
-        Class<TReport> clazz = (Class<TReport>) Class.forName("com.mars.wang.domain.wci.TReport");
+    public void setMethods(List<String> method) {
+        this.methods = method;
+    }*/
 
-        //获取一个对象
-        Constructor con =  clazz.getConstructor();
-        TReport m = (TReport) con.newInstance();
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
+    }
+
+    public Report getReport() {
+        return report;
+    }
+
+    public void setReport(Report report) {
+        this.report = report;
+    }
+
+    public Object setAll(List<String> values,List<String> methods) throws Exception{
+        //System.out.println(values.size()+"=="+methods.size());
+
 
         //获取Method对象
         Method method;
         //调用invoke方法来调用
-
-        //System.out.println(m);
-
+        //System.out.println(m)
         for (int i =0;i<values.size();i++){
-            System.out.println("进入循环！");
-            String value = values.get(i);
+            String value =values.get(i);
+            //System.out.println("进入循环！");
+            if (i==0&&value.length()>50){
+                value= value.substring(0, 50);
+
+            }
+
+
             //方法名成
-            char[] cs=methodNames.get(i).toCharArray();
+            char[] cs=methods.get(i).toCharArray();
             cs[0]-=32;
             String method1 ="set"+String.valueOf(cs);
-            System.out.println(method1);
+            //System.out.println(method1);
             method = clazz.getMethod(method1, String.class);
-            method.invoke(m, value);
-
+            method.invoke(report, value);
         }
-        //System.out.println(m);
 
+        //System.out.println("setAll父类执行！");
 
+          return report;
 
-          return m;
-
-
-    }*/
-
-
-
-    @Override
-    public String toString() {
-        return "TReport{" +
-                "sonumber='" + sonumber + '\'' +
-                ",wzr cpod='" + cpod + '\'' +
-                ",wzr packListP='" + packListP + '\'' +
-                ",wzr loadingdate='" + loadingdate + '\'' +
-                ",wzr shipHub='" + shipHub + '\'' +
-                ",wzr destinationCity='" + destinationCity + '\'' +
-                ",wzr province='" + province + '\'' +
-                ",wzr shipToP='" + shipToP + '\'' +
-                ",wzr consigneename='" + consigneename + '\'' +
-                ",wzr addressP='" + addressP + '\'' +
-                ",wzr ctnsP='" + ctnsP + '\'' +
-                ",wzr unitP='" + unitP + '\'' +
-                ",wzr volume='" + volume + '\'' +
-                ",wzr buP='" + buP + '\'' +
-                ",wzr air='" + air + '\'' +
-                ",wzr leadtime='" + leadtime + '\'' +
-                ",wzr eta='" + eta + '\'' +
-                ",wzr carrier='" + carrier + '\'' +
-                ",wzr shipstatus='" + shipstatus + '\'' +
-                ",wzr actualarrivaltime='" + actualarrivaltime + '\'' +
-                ",wzr remark='" + remark + '\'' +
-                ",wzr podupload='" + podupload + '\'' +
-                ",wzr shipRecourse='" + shipRecourse + '\'' +
-                ",wzr warehouse='" + warehouse + '\'' +
-                ",wzr sysCRD='" + sysCRD + '\'' +
-                ",wzr updateEta='" + updateEta + '\'' +
-                ",wzr problemOwner='" + problemOwner + '\'' +
-                '}';
     }
+
+
+
+
+
+
 
 }

@@ -3,7 +3,9 @@ package com.mars.wang.utils;
 import com.mars.wang.Demo2;
 import com.mars.wang.domain.Customer;
 
+import com.mars.wang.domain.wci.Report;
 import com.mars.wang.domain.wci.TReport;
+import com.mars.wang.vo.OB;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
@@ -15,6 +17,8 @@ import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -60,7 +64,7 @@ public class POI {
                 //System.out.println(o);
 
                 List<String> value = getValue(o);
-
+                System.out.println(value);
                 listS.add(value);
             }
 
@@ -68,6 +72,8 @@ public class POI {
     }
     //解析toString值
     public static List<String> getValue(Object object){
+        Properties pro = new Properties();
+        
         List<String> list = new ArrayList<>();
         String[] split = object.toString().split(",wzr");
         for (int i = 0;i<split.length;i++){
@@ -84,7 +90,7 @@ public class POI {
                 substring = value.split("=")[1];
 
             }
-
+            //System.out.println(substring);
             list.add(substring);
 
         }
@@ -639,50 +645,98 @@ public class POI {
             }
         }
     }*/
-    public static List readExcel(Object o,String path) throws Exception {
-
-        TReport tReport = new TReport();
-
-
-        InputStream  in = new FileInputStream("C:\\Users\\Administrator\\Downloads\\Tracking Report(20210526).xlsx");
+    public static List<List<String>> readExcel(Object o,InputStream in,int startRows) throws Exception {
 
         Workbook wb = new XSSFWorkbook(in);
 
         Sheet sheet1 = wb.getSheetAt(0);
 
-        List<String> excelHeads = POI.getExcelHeads(tReport,false);
+        List<String> excelHeads = POI.getExcelHeads(o,false);
 
         int lastRowNum = sheet1.getLastRowNum();
 
-        Map<String,String> map;
+        List<List<String>> doubleList = new ArrayList<>();
         List<String>  listMap;
         List<TReport> tReports = new ArrayList<>();
 
         //System.out.println("last="+lastRowNum);
-        for (int i =2;i<=lastRowNum;i++){
+        for (int i =startRows;i<=lastRowNum;i++){
             listMap= new ArrayList<>();
             Row row = sheet1.getRow(i);
 
-            System.out.println("第"+i+"行=====  ");
+            //System.out.println("第"+i+"行=====  ");
 
             for (int col=0;col<excelHeads.size();col++){
 
                 Cell cell = row.getCell(col);
 
+                String stringCellValue = cell.getStringCellValue();
+
+                    //System.out.print(col+"<"+stringCellValue+">");
+
+
+
+
+                //如果单元格为空
+
+                    listMap.add(stringCellValue);
+
                 //System.out.print(cell.getStringCellValue()+"  ");
                 //map.put(excelHeads[i],cell.getStringCellValue());
                 //System.out.print(cell.getStringCellValue());
-                listMap.add(cell.getStringCellValue());
+
+                //System.out.print(stringCellValue+"==");
+
+
             }
-            TReport tReport1 = tReport.setAll(listMap, excelHeads);
-            tReports.add(tReport1);
+            //System.out.println("==="+listMap.size());
+
+            doubleList.add(listMap);
 
 
         }
 
-        return tReports;
+        return doubleList;
     }
+    //反射机制创建对象
+    public static List<Object> getTReport(String type, List<List<String>> listList) throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Properties properties = new Properties();
+        InputStream inputStream = POI.class.getClassLoader().getResourceAsStream("Report.properties");
+        //读取映射文件
 
+        String tReport = properties.getProperty(type);
+        Class<Report> clazz = (Class<Report>) Class.forName("com.mars.wang.domain.wci.TReport");
+
+        Constructor con =  clazz.getConstructor();
+        List<Object> objects = new ArrayList<>();
+        Report m;
+        //集合是否为空
+
+        if (listList.size()>0&&listList!=null&&type.length()>0){
+            m = (Report) con.newInstance();
+            List<String> excelHeads = POI.getExcelHeads(m, false);
+
+            for (List list:listList){
+                try {
+                    Object o = m.setAll(list, excelHeads);
+                    objects.add(o);
+                }catch (Exception e){
+                    //e.printStackTrace();
+                    //System.out.println("setAll异常");
+                }
+
+
+            }
+
+
+        }
+
+
+
+
+        return objects;
+
+    }
 
 
 

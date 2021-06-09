@@ -63,7 +63,7 @@ public class Data1039 extends ParentData  implements Serializable {
         return customer;
     }
     @Override
-    public DataPrediction getINSTANCE() throws MyException, ParseException {
+    public Prediction getINSTANCE() throws MyException, ParseException {
         Customer customer = getCus(getOldCus());
         if (!customer.getFlag()){
 
@@ -146,7 +146,7 @@ public class Data1039 extends ParentData  implements Serializable {
     public void setCreateDate() {
         String date = Fomat.getString(new Date().getTime());
 
-        super.dataPrediction.setCreateDate(date);
+        super.prediction.setCreateDate(date);
 
     }
     //产品类型
@@ -154,13 +154,13 @@ public class Data1039 extends ParentData  implements Serializable {
     public void setBuP() {
         String bu = DataExu.getBu(this.divs);
 
-        super.dataPrediction.setBuP(bu);
+        super.prediction.setBuP(bu);
     }
     //客户单号
     @Override
     public void setPackListP() {
 
-        super.dataPrediction.setPackListP(this.packlist);
+        super.prediction.setPackListP(this.packlist);
     }
     //发货时间
     @Override
@@ -169,12 +169,12 @@ public class Data1039 extends ParentData  implements Serializable {
         String dateFormat = DataExu.getSameDate(this.wMSShipDate);
 
 
-        super.dataPrediction.setShipDateP(dateFormat);
+        super.prediction.setShipDateP(dateFormat);
     }
 
     @Override
     public void setShipHub() {
-        super.dataPrediction.setShipHub("BZ");
+        super.prediction.setShipHub("BZ");
     }
 
 
@@ -183,14 +183,14 @@ public class Data1039 extends ParentData  implements Serializable {
     public void setCtnsP() {
        // int num = Integer.parseInt(this.cTns);
 
-        super.dataPrediction.setCtnsP(this.cTns);
+        super.prediction.setCtnsP(this.cTns);
     }
     //件数
     @Override
     public void setUnitP() {
         //int num = Integer.parseInt(this.unit);
 
-        super.dataPrediction.setUnitP(this.unit);
+        super.prediction.setUnitP(this.unit);
     }
 
 

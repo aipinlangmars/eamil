@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.wang.dao.DataPredictionDao">
+    <insert id="insertData" parameterType="java.util.List">
+        INSERT INTO  prediction
+        (
+        createDate,
+        buP,
+        packListP,
+        shipDateP,
+        shipHub,
+        DestinationCity,
+        shipToP,
+        addressP,
+        ctnsP,
+        unitP,
+        transportType,
+        lead,
+        eta,
+        status,
+        carrierP,
+        noteRemark,
+        AbnormalIssue,
+        shortN,
+        cusName,
+        consignee,
+        telephoneP,
+        phoneP
+        )VALUES
+        <foreach collection="list" index="index" item="prediction" separator=","  >
+            (
+
+            #{prediction.createDate},
+            #{prediction.buP},
+            #{prediction.packListP},
+            #{prediction.shipDateP},
+            #{prediction.shipHub},
+            #{prediction.DestinationCity},
+            #{prediction.shipToP},
+            #{prediction.addressP},
+            #{prediction.ctnsP},
+            #{prediction.unitP},
+            #{prediction.transportType},
+            #{prediction.lead},
+            #{prediction.eta},
+            #{prediction.status},
+            #{prediction.carrierP},
+            #{prediction.noteRemark},
+            #{prediction.AbnormalIssue},
+            #{prediction.shortN},
+            #{prediction.cusName},
+            #{prediction.consignee},
+            #{prediction.telephoneP},
+            #{prediction.phoneP}
+
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOneValue" parameterType="com.mars.wang.domain.Prediction">
+        INSERT INTO  prediction
+        (
+        createDate,
+        buP,
+        packListP,
+        shipDateP,
+        shipHub,
+        DestinationCity,
+        shipToP,
+        addressP,
+        ctnsP,
+        unitP,
+        transportType,
+        lead,
+        eta,
+        status,
+        carrierP,
+        noteRemark,
+        AbnormalIssue,
+        shortN,
+        cusName,
+        consignee,
+        telephoneP,
+        phoneP
+        )VALUES
+        (
+        #{createDate},
+        #{buP},
+        #{packListP},
+        #{shipDateP},
+        #{shipHub},
+        #{DestinationCity},
+        #{shipToP},
+        #{addressP},
+        #{ctnsP},
+        #{unitP},
+        #{transportType},
+        #{lead},
+        #{eta},
+        #{status},
+        #{carrierP},
+        #{noteRemark},
+        #{AbnormalIssue},
+        #{shortN},
+        #{cusName},
+        #{consignee},
+        #{telephoneP},
+        #{phoneP})
+    </insert>
+    <update id="updatePre"  parameterType="com.mars.wang.domain.Prediction">
+            update prediction SET
+        createDate = #{createDate},
+        buP = #{buP},
+        shipDateP = #{shipDateP},
+        shipHub = #{shipHub},
+        DestinationCity = #{DestinationCity},
+        shipToP = #{shipToP},
+        addressP = #{addressP},
+        ctnsP = #{ctnsP},
+        unitP = #{unitP},
+        transportType = #{transportType},
+        lead = #{lead},
+        eta = #{eta},
+        status = #{status},
+        carrierP = #{carrierP},
+        noteRemark = #{noteRemark},
+        AbnormalIssue = #{AbnormalIssue},
+        shortN = #{shortN},
+        cusName = #{cusName},
+        consignee = #{consignee},
+        telephoneP = #{telephoneP},
+        phone = #{phoneP},
+            where packListP = #{packListP}
+    </update>
+
+
+
+
+
+
+</mapper>
